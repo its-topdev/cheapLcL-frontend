@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.checkbox-wrapper{
+    .input{
+        display: inline-block;
+        vertical-align: top;
+        accent-color: $blue-dark;
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+    }
+    .text{
+        margin-left: 11px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .checkbox-wrapper{
+        .text{
+            font-size: 15px;
+        }
+    }
+}

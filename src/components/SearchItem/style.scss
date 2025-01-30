@@ -1,0 +1,161 @@
+@import "../../styles/variables.scss";
+
+.searchbox-content{
+    &-block{
+        text-align: left;
+        padding-top: 35px;
+        &-title{
+            font-size: 20px;
+            line-height: 20px;
+            color: $blue-dark;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+        &-weight{
+            display: flex;
+            justify-content: space-between;
+            .searchbox-input{
+                width: 48%;
+            }
+        }
+        .searchbox-select{
+            position: relative;
+            font-size: 12px;
+            .loader-container{
+                display: block;
+                padding-top: 8px;
+            }
+            .searchbox-select-label{
+                pointer-events: none;
+                position: absolute;
+                top: 8px;
+                left: 28px;
+                font-size: 14px;
+                font-weight: 600;
+                color: $black;
+            }
+            .cheap__control{
+                cursor: pointer;
+                border-radius: 20px;
+                width: 100%;
+                height: 60px;
+                background: #F9FAFB;
+                border: 1px solid #00000033;
+                font-weight: 600;
+                color: $blue;
+            }
+            .cheap__value-container{
+                padding-left: 28px;
+                margin-top: 20px
+            }
+            .cheap__input-container,
+            .cheap__placeholder{
+                margin: 0;
+            }
+            .cheap__single-value{
+                color: $blue-dark;
+                margin: 0;
+            }
+        }
+        
+        .searchbox-input{ 
+            position: relative;
+            input{
+                font-size: 12px;
+                border-radius: 20px;
+                width: 100%;
+                height: 60px;
+                background: #F9FAFB;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                font-weight: 600;
+                color: $blue-dark;
+                padding-top: 20px;
+                padding-left: 28px;
+            }             
+            &-label{
+                position: absolute;
+                top: 8px;
+                left: 28px;
+                font-size: 14px;
+                font-weight: 600;
+                color: $black;
+            }
+        }    
+    }    
+}
+
+@media screen and (min-width: 641px) and (max-width: 860px) { 
+    .searchbox-content-block{
+        .searchbox-content-block-title{
+            font-size: 18px;
+        }
+        .searchbox-content-block-weight{
+            .searchbox-input-label{
+                left: 16px;
+            }
+            .searchbox-input{
+                input{
+                    padding-left: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .searchbox-content{
+        overflow-y: scroll;
+        display: none;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+        background: #21212199;
+        &.open{
+            display: block;
+        }
+        .searchbox-content-block{
+            max-width: 93%;
+            position: absolute;
+            top: 70px;
+            right: 0;
+            left: 8px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px 11px 20px 11px;
+            border-radius: 12px;
+            .searchbox-content-block-title{
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                margin-top: 10px;
+            }
+            .searchbox-content-block-weight{
+                display: block;
+                .searchbox-input{
+                    width: 100%;
+                    &:first-child{
+                        margin-bottom: 20px;
+                    }
+                    input{
+                        padding-left: 10px;
+                    }
+                    .searchbox-input-label{
+                        left: 17px;
+                    }
+                }
+            }
+            .searchbox-select{
+                .searchbox-select-label{
+                    left: 17px;
+                }
+                .cheap__value-container{
+                    padding-left: 17px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+
+.footer{
+    font-size: 24px;
+    text-align: left;
+    background: $blue-dark;
+    height: 74px;
+    line-height: 74px;
+    color: white;
+}
+
+@media screen and (max-width: 720px) {
+    .footer{
+        font-size: 20px;
+        height: 65px;
+        line-height: 65px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .footer{
+        font-size: 14px;
+        height: 39px;
+        line-height: 39px;
+    }
+}

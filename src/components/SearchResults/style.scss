@@ -1,0 +1,215 @@
+@import "../../styles/variables.scss";
+
+.results{
+    margin-bottom: 60px;
+    .no-results{
+        font-size: 40px;
+        text-align: center;
+        font-weight: 600;
+    }
+    .result-item{
+        border-radius: 14.64px;
+        // padding: 32px 37px;
+        padding: 17px 37px;
+        border: 1px solid $grey-light;
+        margin-bottom: 20px;
+        &.cheapest{
+            box-shadow: 0px 0px 12px $blue-dark;
+        }
+        .result-item-carrier{
+            background: #003E8B0F;
+            padding: 4px 31px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            color: $blue;
+            border-radius: 7px;
+            text-transform: uppercase;
+            color: $blue-dark;
+            display: inline-block;
+        }
+        .result-item-wrap-blocks {
+            display: flex;
+            justify-content: space-between;
+            .result-item-block{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                &.result-total-block{
+                    justify-content: end;
+                    .result-total{
+                        font-size: 20px;
+                        text-align: right;
+                        margin-bottom: 20px;
+                        .result-total-price{
+                            font-weight: 600;
+                        }
+                    }
+                    .result-buttons{
+                        .button-blue-1{
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 182px;
+                            height: 43px;
+                        }
+                        .button-blue-2{
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 182px;
+                            height: 43px;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+                .result-item-block-row{
+                    // margin-bottom: 16px;
+                    margin-bottom: 10px;
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
+                    .result-icon{
+                        margin-right: 6px;
+                    }
+                    .result-title{
+                        color: $grey-regular;
+                        // font-size: 20px;
+                        font-size: 19px;
+                        line-height: 24px;
+                        font-weight: 500;
+                        vertical-align: middle;
+                        margin-right: 5px;
+                    }
+                    .result-content{
+                        color: $black;
+                        font-size: 17px;
+                        line-height: 24px;
+                        font-weight: 500;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 860px) { 
+    .results{
+        .result-item{
+            padding: 17px 17px;
+            .result-item-carrier{
+                font-size: 16px;
+            }
+            .result-item-wrap-blocks{
+                display: block;
+                .result-item-block{
+                    float: left;
+                    width: 49%;
+                    margin-bottom: 20px;
+                    &:first-child{
+                        width: 50%;
+                    }
+                    .result-item-block-row{
+                        .result-title{
+                            font-size: 15px;
+                            margin-right: 2px;
+                        }
+                        .result-content{
+                            font-size: 14px;
+                        }
+                    }
+                    &.result-total-block{
+                        clear: both;
+                        float: none;
+                        text-align: center;
+                        width: 100%;
+                        margin-bottom: 0;
+                        .result-total{
+                            text-align: center;
+                            font-size: 17px;
+                            margin-bottom: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .results{
+        .no-results{
+            font-size: 23px;
+        }
+        .result-item{
+            padding: 20px;
+            .result-item-wrap-carrier{
+                margin-bottom: 10px;
+                .result-item-carrier{
+                    font-size: 12px;
+                    margin-bottom: 0;
+                    float: left;
+                    padding: 4px 11px;
+                }
+                .result-total{
+                    float: right;
+                    .result-total-price{
+                        font-weight: 600;
+                    }
+                }
+            }
+            .result-item-wrap-blocks {
+                display: block;
+                .result-item-block{
+                    .result-item-block-row{
+                        &:last-child{
+                            margin-bottom: 10px;
+                        }
+                        .result-title{
+                            font-size: 16px;
+                        }
+                        .result-content{
+                            font-size: 15px;
+                        }
+                    }
+                    &.result-total-block{
+                        .result-buttons{
+                            text-align: center;
+                            margin-top: 20px;
+                            .button-blue-1{
+                                width: 139px;
+                                height: 43px;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .results{
+        .result-item{
+            padding: 20px 11px;
+            .result-item-wrap-blocks {
+                .result-item-block{
+                    .result-item-block-row{
+                        .result-title{
+                            font-size: 15px;
+                            margin-right: 4px
+                        }
+                        .result-content{
+                            font-size: 14px;
+                        }
+                        .result-icon {
+                            margin-right: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

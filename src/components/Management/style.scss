@@ -1,0 +1,95 @@
+@import "../../styles/variables.scss";
+
+.management{
+    height: 100%;
+    max-height: calc(100% - 99px);
+    .management-content-wrapper{
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        .management-sidebar{
+            width: 14%;
+        }
+        .management-header-body{
+            width: 86%;
+            .management-body{
+            position: relative;
+            height: 100%;
+            background: $grey-super-light;
+            .management-body-container{
+                margin: 0 auto;
+                max-width: 96%;
+                padding-top: 15px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 0;
+                height: 100%;
+                .management-body-top{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                .management-body-title{
+                    font-size: 32px;
+                    font-weight: 700;
+                    line-height: 32px;
+                    margin-bottom: 0;
+                }
+                }
+                .management-body-table{
+                    background: $white;
+                    padding: 20px;
+                    overflow-y: auto;
+                    height: 100%;
+                    table{
+                        width: 100%;
+                        thead{
+                            background: $grey-super-light;
+                            th{
+                                font-size: 15px;
+                                font-weight: 600;
+                                padding: 17px 0;
+                                width: 8%;
+                                text-align: center;
+                                &.action{
+                                width: 5%;
+                                }
+                            }
+                        }
+                        tr{
+                            border-bottom: 2px solid $grey-super-light;
+                        }
+                        td{
+                            font-size: 14px;
+                            font-weight: 500;
+                            padding: 9px 2px;
+                            width: 8%;
+                            text-align: center;
+                            &.action{
+                            width: 5%;
+                            }
+                        }            
+                    }
+                }
+                .management-body-pagination{
+                background: $white;
+                padding: 0 20px;
+                }
+                .back-button{
+                    position: absolute;
+                    top: 9px;
+                    left: -22px;
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+                    button{
+                        background: none;
+                        border: none;
+                    }
+                }
+            }
+            }
+        }
+    }
+}

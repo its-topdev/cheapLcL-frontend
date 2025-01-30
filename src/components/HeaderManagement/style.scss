@@ -1,0 +1,28 @@
+@import "../../styles/variables.scss";
+
+.header-management{
+    background: $blue-dark;
+    height: 99px;
+    .header-management-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 96%;
+        padding: 22px 0;
+        .header-management-logo{
+            img{
+                height: 64px;
+            }
+        }
+        .header-management-note{
+            margin-right: 40px;
+            margin-left: auto;
+        }  
+        .header-management-profile{
+            .user_name{
+                color: white;
+            }
+        }
+    }
+     
+}

@@ -1,0 +1,101 @@
+@import "../../../styles/variables.scss";
+
+.home{
+    .search-block{
+        text-align: center;
+        background-color: #F3F8FE;
+        background-size: cover;
+        height: 100vh;
+        position: relative;
+        .search-block-content{
+            max-width: 95%;
+            z-index: 5;
+            position: absolute;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            top: 40%;
+            .search-titles{
+                .search-titles-first{
+                    font-size: 49px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+    &-content{
+        padding: 60px 0;
+        .results-top{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            .results-top-title{
+                font-size: 32px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 860px) { 
+    .home{
+        .search-block{
+            .search-block-content{
+                .search-titles{
+                    .search-titles-first{
+                        font-size: 40px;
+                    }
+                }
+            }
+        }
+        .home-content{
+            .results-top{
+                .results-top-title{
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .home{
+        .search-block{
+            height: 600px;
+            padding-top: 120px;
+            .search-block-content{
+                position: relative;
+                max-width: 90%;
+                margin: 0 auto;
+                top: 0;
+                .search-titles{
+                    .search-titles-first{
+                        font-size: 22px;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+        .home-content{
+            padding: 40px 0;
+            .results-top{
+                display: block;
+                .results-top-title{
+                    font-size: 20px;
+                    margin-bottom: 10px;
+                }
+                .sort{
+                    text-align: right;
+                    .sort-type{
+                        height: 37px;
+                        padding: 0 3px 0 15px;
+                    }
+                    .sort-menu{
+                        height: 37px;
+                        padding: 0 17px 0 15px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+
+.header-inner{
+    height: 95px;
+    padding: 12px 27px;
+    background: $blue-dark;
+    .header-inner-container{
+        img{
+            height: 75px;
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .header-inner{
+        border-radius: 10px 10px 0 0;
+        height: 70px;
+        .header-inner-container{
+            img{
+                height: 58px;
+            }
+        }
+    }
+}

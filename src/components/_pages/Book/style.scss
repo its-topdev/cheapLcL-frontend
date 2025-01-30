@@ -1,0 +1,275 @@
+@import "../../../styles/variables.scss";
+
+.book_page {
+  &.modal-wrapper {
+    .modal {
+      // width: 1000px;
+      height: 90%;
+      width: 1332px;
+    }
+  }
+  .book-titles {
+    text-align: left;
+    .book-title {
+      font-size: 43px;
+      font-weight: 600;
+      line-height: 43px;
+    }
+    .book-second-title {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+    }
+  }
+  .shipper-block {
+    width: 310px;
+    max-width: 100%;
+    margin: 30px 0;
+    .cheap__control {
+      cursor: pointer;
+      background: $blue-dark;
+      &--is-focused {
+        background: $blue-dark;
+      }
+      .cheap__placeholder {
+        color: white;
+      }
+      .cheap__single-value {
+        color: white;
+      }
+    }
+    .new-shipper-wrap {
+      padding: 10px 15px;
+      .new-shipper-button {
+        height: 39px;
+      }
+    }
+  }
+  .book-item-carrier {
+    background: #003e8b0f;
+    padding: 4px 31px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: block;
+    text-align: center;
+    color: $blue-dark;
+    border-radius: 7px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .book-details {
+    margin-top: 30px;
+    text-align: left;
+    .book-item-wrap-blocks {
+      .book-item-block {
+        .book-item-block-row {
+          margin-bottom: 11px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .book-item-icon {
+            margin-right: 6px;
+          }
+          .book-item-title {
+            color: $grey-regular;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 500;
+            vertical-align: middle;
+            margin-right: 5px;
+          }
+          .book-item-content {
+            color: $black;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 500;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+  .charges_block {
+    width: 450px;
+    max-width: 100%;
+    text-align: right;
+    display: inline-block;
+    .loader-container {
+      justify-content: left;
+      padding: 24px;
+    }
+    .charges_block_title {
+      background: none;
+      font-size: 18px;
+      font-weight: 400;
+      text-align: right;
+      color: $black;
+      padding: 10px 20px;
+      width: 100%;
+      border: none;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        background-image: url("../../../assets/svg/arrow-down-black.svg");
+        background-repeat: no-repeat;
+        width: 14px;
+        height: 8px;
+        right: -4px;
+        top: 19px;
+        background-size: 13px;
+      }
+      &.open::before {
+        transform: rotate(180deg);
+        top: 16px;
+      }
+    }
+    .charges_block_table {
+      margin-bottom: 30px;
+      width: 100%;
+      table {
+        width: 100%;
+        thead {
+          background: $grey-super-light;
+          th {
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: left;
+          }
+        }
+        tbody {
+          tr {
+            border-bottom: 1px solid #d2d2eb;
+            &:last-child {
+              border: none;
+            }
+          }
+          td {
+            padding: 8px;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+  .book-total {
+    text-align: right;
+    margin-bottom: 25px;
+    .book-total-subtotal {
+      background: $grey-super-light;
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: $black;
+    }
+    .book-total-oceam-freight {
+      padding: 15px 20px;
+      font-size: 18px;
+      color: $black;
+    }
+  }
+  .book_notice {
+    text-align: left;
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+  .book_submit {
+    text-align: center;
+    .button-blue-1 {
+      width: 278px;
+      max-width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .book_page {
+    .book-titles {
+      .book-title {
+        font-size: 38px;
+      }
+    }
+    .book-details {
+      margin-top: 30px;
+      text-align: left;
+      .book-item-wrap-blocks {
+        .book-item-block {
+          .book-item-block-row {
+            .book-item-title {
+              font-size: 19px;
+            }
+            .book-item-content {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .book_page {
+    &.modal-wrapper {
+      .modal {
+        height: 95%;
+        padding: 20px 15px;
+      }
+    }
+    .book-titles {
+      .book-title {
+        font-size: 30px;
+      }
+      .book-second-title {
+        font-size: 20px;
+        line-height: 25px;
+        color: $grey-little-light;
+      }
+    }
+    .book-item-carrier {
+      font-size: 16px;
+    }
+    .book-details {
+      .book-item-wrap-blocks {
+        .book-item-block {
+          .book-item-block-row {
+            margin-bottom: 10px;
+            &:last-child {
+              margin-bottom: 10px;
+            }
+            .book-item-title {
+              font-size: 14px;
+              margin-right: 4px;
+            }
+            .book-item-content {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+    .book-total {
+      .book-total-oceam-freight {
+        font-size: 16px;
+        padding: 0 20px;
+      }
+      .charges_block {
+        .charges_block_title {
+          font-size: 16px;
+          padding: 15px 20px;
+          &::before {
+            top: 26px;
+          }
+          &.open::before {
+            top: 22px;
+          }
+        }
+      }
+      .book-total-subtotal {
+        font-size: 17px;
+      }
+    }
+  }
+}

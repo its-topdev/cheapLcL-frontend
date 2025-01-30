@@ -1,0 +1,26 @@
+@import "../../../styles/variables.scss";
+
+.quote-row{
+    .quote-row-restore{
+        color: #E16363;
+        background-color: white;
+        border: 1px solid #E16363;
+        border-radius: 4px;
+        padding: 3px 7px;
+        margin: 0px 3px;
+        width: 75px;
+        height: 30px;
+        max-width: 80%;
+    }
+    .quote-row-cancel{
+        color: white;
+        background-color: #237426;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 3px 7px;
+        margin: 0px 3px;
+        width: 75px;
+        height: 30px;
+        max-width: 90%;
+    }
+}

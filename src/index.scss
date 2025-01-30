@@ -1,0 +1,585 @@
+@import "styles/variables.scss";
+
+ @font-face {
+  font-family: 'PilatWide';
+  font-weight: 900;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 800;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Heavy.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 700;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 600;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-DemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 500;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Book.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 400;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 300;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Light.ttf") format("truetype");
+}
+// @font-face {
+//   font-family: 'PilatWide';
+//   font-weight: 200;
+//   src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-.ttf") format("truetype");
+// }
+@font-face {
+  font-family: 'PilatWide';
+  font-weight: 100;
+  src: local("PilatWide"), url("./assets/fonts/PilatWide/PilatWide-Thin.ttf") format("truetype");
+}
+
+:root {
+  font-family: PilatWide, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  height: 100%;
+}
+#root{
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: PilatWide, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  height: 100%;
+  ::-webkit-scrollbar {
+    width: 9px;
+  }  
+  ::-webkit-scrollbar-track {
+    // background: $grey-super-light; 
+    box-shadow: inset 0 0 5px grey; 
+      border-radius: 10px;
+  }   
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+}
+
+h1{
+  font-family: PilatWide, system-ui, Avenir, Helvetica, Arial, sans-serif!important;
+}
+
+textarea:focus-visible{
+  outline-color: $blue;
+}
+
+.main-container{
+  width: 1450px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+input{
+  outline: none;
+  font-family: PilatWide, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.form-error{
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 9px;
+  right: 0;
+}
+
+.button-blue-1{
+  background: $blue;
+  color: $blue-regular;
+  font-size: 16px;
+  font-weight: 700;
+  height: 48px;
+  // width: 255px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.button-blue-2{
+  background: $white;
+  color: $blue-dark;
+  font-size: 16px;
+  font-weight: 500;
+  height: 48px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid $blue-dark;
+  transition: background 0.7s;
+  &:hover{
+    background: $blue-dark;
+    color: $white;
+  }
+}
+
+.button-grey-1{
+  background: $grey-regular;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  height: 48px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.input-text{
+  background: white;
+  height: 47px;
+  border: 1px solid #D9D9D9;
+  border-radius: 12px;
+  display: block;
+  box-sizing: border-box;
+}
+.input-text:focus,
+.input-text:focus-visible {
+  outline: 1px solid $blue;
+}
+
+.modal-wrapper{
+  &.show-modal{
+    opacity: 1;
+    z-index: 11;
+  }
+  &.hide-modal{
+    opacity: 0;
+    z-index: -1;
+  }
+  transition: all 0.5s;
+  position: fixed;
+  top: 0;
+  background: #21212194;
+  width: 100%;
+  height: 100%;
+  .modal{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 50%;
+    bottom: 0;
+    transform: translate(0,-50%);
+    width: 518px;
+    max-width: 95%;
+    height: 363px;
+    background: white;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    display: block;
+    padding: 55px;
+    text-align: center;
+    box-shadow: 0px 0px 29px #626285;
+    &-body-block{
+      .modal-title-block{
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 15px;
+      }
+      .modal-text{
+        font-size: 16px;
+        font-weight: 400;
+        color: $grey;
+      }
+    }
+    &-footer-block{
+      margin-top: 23px;
+    }
+  }
+}
+
+
+// react-confirm
+.react-confirm-alert-overlay{
+    background: rgba(33, 33, 33, 0.5803921569);
+    .custom-confirm-alert{
+      width: 518px;
+      height: 363px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0px 0px 29px #626285;
+      text-align: center;
+        .custom-confirm-alert-icon{
+          width: 91px;
+          height: 91px;
+          text-align: center;
+          margin: 0 auto;
+          background: $blue;
+          border-radius: 100%;
+          padding: 23px;
+          margin-bottom: 23px;
+          svg{
+            path{
+              fill: $blue-dark;
+            }
+          }
+        }
+        .custom-confirm-alert-title {
+          font-size: 32px;
+          font-weight: 700;
+          margin-bottom: 12px;
+          color: $blue-dark;
+        }
+        .custom-confirm-alert-text {
+          color: #6F6C90;
+          font-size: 16px;
+          font-weight: 400;
+          &.blue-text{
+            color: $blue-dark;
+          }
+        }
+        .custom-confirm-alert-text-small {
+          color: #6F6C90;
+          font-size: 14px;
+          font-weight: 400;
+        }
+        .custom-confirm-alert-buttons{
+          display: flex;
+          justify-content: space-between;
+          margin-top: 40px;
+          button{  
+            background: $grey-light;
+            color: $black;       
+            font-size: 16px;
+            font-weight: 600;
+            height: 48px;
+            border: none;
+            border-radius: 6px;
+            width: 48%;
+            margin: 0;
+            &.confirm-yes{
+              background: $blue;
+              color: $blue-dark;
+            }
+          }
+        }
+    }
+}
+
+.react-calendar{
+  font-family: PilatWide, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #F9F9F9;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  padding: 20px;
+  &__tile{
+    margin-bottom: 15px;
+  }
+  &__navigation{
+    padding: 0 28px;
+    &__prev2-button,
+    &__next2-button{
+      display: none;
+    }
+    .react-calendar__navigation__arrow.react-calendar__navigation__prev-button{
+      order: 2;
+      background-image: url("assets/svg/arrow-prev.svg");
+      background-repeat: no-repeat;
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      font-size: 0;
+      min-width: 10px;
+      margin-top: 13px;
+      margin-right: 30px;
+      &:enabled:hover{
+        background-image: url("assets/svg/arrow-prev.svg");
+      }
+    }
+    .react-calendar__navigation__arrow.react-calendar__navigation__next-button{
+      order: 3;
+      background-image: url("assets/svg/arrow-next.svg");
+      background-repeat: no-repeat;
+      height: 20px;
+      width: 20px;
+      padding: 0;
+      font-size: 0;
+      min-width: 10px;
+      margin-top: 13px;
+      &:enabled:hover{
+        background-image: url("assets/svg/arrow-next.svg");
+      }
+    }
+    &__label{
+      order: 1;
+      text-align: left;
+      background: none;
+      color: black;
+      font-weight: 700;
+      margin-left: 25px;
+      &:enabled:hover, 
+      &:enabled:focus{
+        background: none;
+      }
+    }
+  }
+  &__month-view__weekdays__weekday{
+    font-size: 17.53px;
+    font-weight: 600;
+    color: $black;
+    abbr[title]{
+      text-decoration: none;
+      text-transform: capitalize;
+    }
+  }
+  &__month-view__days__day{
+    color: $grey-dark;
+    line-height: 26.29px;
+    font-size: 17.53px;
+    font-weight: 500;
+    &--weekend{
+      color: $grey-dark;
+    }
+    &--neighboringMonth{
+        color: $grey-light;
+    }
+    &.react-calendar__tile{
+      display: flex;
+      justify-content: center;
+      &:enabled:focus,
+      &:enabled:hover{
+        background: none;
+        padding: 0;
+        abbr{
+          width: 38px;
+          height: 38px;
+          background: $blue-dark;
+          border-radius: 100%;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    &.react-calendar__tile--active{
+      height: 38px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background: none;
+      &:enabled:focus,
+      &:enabled:hover{
+        background: none;
+      }
+      abbr{
+        width: 38px;
+        height: 38px;
+        background: $blue-dark;
+        border-radius: 100%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  &__tile--now{
+      height: 38px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background: none;
+      &:enabled:focus,
+      &:enabled:hover{
+        background: none;
+      }
+      abbr{
+        width: 38px;
+        height: 38px;
+        background: $grey-light;
+        border-radius: 100%;
+        color: $grey-dark;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  }
+}
+
+.react-datepicker-wrapper{
+  width: 100%;
+}
+.react-datepicker{
+  font-family: inherit;
+  border: none;
+    box-shadow: 1px 1px 9px #0000004d;
+}
+.react-datepicker__month-container{
+  background: #F9F9F9;
+  border-radius: 20px;
+}
+.react-datepicker__day-name{
+  font-weight: 600;
+}
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day:hover,
+.react-datepicker__day--selected,
+.react-datepicker__day--selected:hover{
+  background: $blue-dark;
+  border-radius: 100%;
+  color: white;
+}
+.react-datepicker__triangle{
+  display: none;
+}
+
+.small-select{
+  .css-t3ipsp-control,
+  .css-13cymwt-control{
+    min-height: 25px;
+    height: 25px;
+  }
+  .css-w9q2zk-Input2{
+    padding: 0;
+    margin: 0;
+  }
+  .css-15lsz6c-indicatorContainer,
+  .css-1xc3v61-indicatorContainer{
+    padding: 0;
+  }
+}
+
+// react-select
+.css-b62m3t-container{
+  .cheap__option{
+    transition: all 0.3s;
+    &--is-focused{
+      // background: $grey-light!important;
+      background: none;
+    }
+    &:hover{
+      background: $grey-light;
+      color: $black;
+      cursor: pointer;
+    }
+    &--is-selected{
+        background: $blue-dark;
+        color: white;
+        cursor: pointer;
+    }
+  }
+  .cheap__control{
+    cursor: pointer;
+    &--is-focused{
+      border: 1px solid #00000033!important;
+      box-shadow: 0px 0px 2px $blue!important;
+    }
+  }
+}
+
+
+
+// @media (prefers-color-scheme: light) {
+//   :root {
+//     color: #213547;
+//     background-color: #ffffff;
+//   }
+//   a:hover {
+//     color: #747bff;
+//   }
+//   button {
+//     background-color: #f9f9f9;
+//   }
+// }
+
+.display-desktop-720{
+  display: block;
+}
+.display-mobile-720{
+  display: none;
+}
+.display-desktop-640{
+  display: block;
+}
+.display-mobile-640{
+  display: none;
+}
+@media screen and (max-width: 720px) {
+  .display-desktop-720{
+    display: none;
+  }
+  .display-mobile-720{
+    display: block;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .display-desktop-640{
+    display: none;
+  }
+  .display-mobile-640{
+    display: block;
+  }
+  
+  .react-calendar{
+    padding: 10px;
+    &__navigation{
+      padding: 0;
+      .react-calendar__navigation__label__labelText{
+        font-size: 14px;
+      }
+    }
+    &__month-view__weekdays__weekday{
+      font-size: 12px;
+    }
+    &__month-view__days__day{
+      font-size: 12px;
+    }
+  }
+  .react-calendar__month-view__days__day.react-calendar__tile--active{
+    height: 32px;
+  }
+  .react-calendar__month-view__days__day.react-calendar__tile:enabled:focus abbr,
+  .react-calendar__month-view__days__day.react-calendar__tile:enabled:hover abbr{
+    width: 32px;
+    height: 32px;
+  }
+  .react-calendar__month-view__days__day{
+    line-height: 13.29px;
+  }
+  .react-calendar__tile--now{
+    height: 32px;
+    abbr{
+      width: 32px;
+      height: 32px;
+    }
+  }
+}

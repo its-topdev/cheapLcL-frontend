@@ -1,0 +1,39 @@
+@import "../../styles/variables.scss";
+
+.loader {
+  &-animation {
+    border: 2px solid white;
+    border-top: 2px solid $blue;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin .5s linear infinite;
+
+    &-lg {
+      width: 50px;
+      height: 50px;
+    }
+
+    &-sm {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &-center {
+    margin: 20px auto;
+  }
+
+  &-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

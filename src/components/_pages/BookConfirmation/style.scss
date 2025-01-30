@@ -1,0 +1,103 @@
+@import "../../../styles/variables.scss";
+
+.book-confirmation{
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../assets/images/background-register.jpg");
+    background-size: cover;
+    background-position: right;
+    &.no-scroll{
+        height: 100%;
+        max-height: calc(100%);
+    }
+    // &.has-scroll{
+    //     .book-confirmation-content{
+    //         margin-top: 20px;
+    //     }
+    // }
+    &-wrapper{
+        position: relative;
+        background: white;
+        height: 100%;
+        width: 50%;
+        max-width: 629px;
+        text-align: left;
+        .book-confirmation-content{
+            width: 485px;
+            max-width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 85px;
+            .book-confirmation-title{
+                font-size: 43px;
+                font-weight: 600;
+            }
+            .book-confirmation-second-title{
+                font-size: 25px;
+                font-weight: 400;
+                margin: 1% 0 0 0;
+            }
+            .book-confirmation-text{
+                font-size: 23px;
+                font-weight: 400;
+                color: $blue-dark;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+        }
+    }
+    .book-confirmation-button-search{
+        margin-top: 80px;
+        text-align: center;
+        padding-bottom: 20px;
+        button{
+            width: 205px;
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .book-confirmation{
+        display: block;
+        background: none;
+        height: auto;
+        &.no-scroll{
+            height: auto;
+            max-height: none;
+            .book-confirmation-content{
+                margin-top: 20px;
+            }
+        }
+        .book-confirmation-background{
+            background-image: url("../../../assets/images/background-register.jpg");
+            height: 389px;
+            background-size: cover;
+            background-position: right;
+        }
+        .book-confirmation-wrapper{
+            width: 90%;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 5px 0 #00000033;
+            display: block;
+            margin-top: -185px;
+            padding-bottom: 20px;
+            .book-confirmation-content{
+                margin-bottom: 43px;
+                display: block;
+                max-width: 88%;
+                .book-confirmation-title{
+                    font-size: 26px;
+                    font-weight: 700;
+                }
+                .book-confirmation-second-title{
+                    font-size: 20px;
+                }
+                .book-confirmation-text{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

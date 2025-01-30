@@ -1,0 +1,172 @@
+@import "../../../styles/variables.scss";
+
+.login{
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../assets/images/background-login.jpg");
+    background-size: cover;
+    background-position: left;
+    &.no-scroll{
+        height: 100%;
+        max-height: calc(100%);
+    }
+    &.has-scroll{
+        .login-content{
+            margin-top: 20px;
+        }
+        .footer-signup{
+            margin-top: 20px;
+        }
+    }
+    &-wrapper{
+        position: relative;
+        background: white;
+        height: 100%;
+        width: 50%;
+        max-width: 629px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .login-content{
+            width: 485px;
+            max-width: 90%;
+            min-height: 331px;
+            margin-right: auto;
+            margin-left: auto;
+            .login-title{
+                font-size: 43px;
+                font-weight: 600;
+            }
+            .login-text{
+                font-size: 20px;
+                font-weight: 400;
+                margin: 1% 0 0 0;
+            }
+            .login-form{
+                margin-top: 9%;
+                label{
+                    margin-bottom: 8px;
+                    display: inline-block;
+                }
+                &-input{
+                    position: relative;
+                    margin-top: 20px;
+                    .input-text{
+                        width: 100%;
+                        margin-bottom: 5px;
+                        padding-left: 47px;
+                        padding-right: 47px;
+                    }
+                    .icon-left{
+                        position: absolute;
+                        left: 12px;
+                        bottom: 10px;
+                        &.forgot-password-icon{
+                            bottom: 15px;
+                        }
+                    }
+                    .icon-eye{
+                        position: absolute;
+                        right: 10px;
+                        bottom: 13px;
+                        background: transparent;
+                        border: none;
+                        cursor: pointer;
+                        &.password{
+                            bottom: 10px;
+                        }
+                    }
+                }                
+                .forgot-password-link{
+                    text-align: right;
+                    &-button{
+                        color: $blue-dark;
+                        background: none;
+                        border: none;
+                        font-weight: 400;
+                    }
+                }
+                &-button{
+                    width: 100%;
+                    margin-top: 10%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-height: 940px) {
+    .login-wrapper{
+        .login-content{
+             .login-title {
+                font-size: 35px;
+             }
+             .login-text{
+                font-size: 17px;
+             }
+        }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .login{
+        display: block;
+        background: none;
+        height: auto;
+        &.no-scroll{
+            height: auto;
+            max-height: none;
+            .login-content{
+                margin-top: 20px;
+            }
+        }
+        .login-background{
+            background-image: url("../../../assets/images/background-login.jpg");
+            height: 389px;
+            background-size: cover;
+            background-position: top;
+        }
+        .login-wrapper{
+            width: 90%;
+            max-width: 100%;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 5px 0 #00000033;
+            display: block;
+            margin-top: -185px;
+            .login-content{
+                margin-bottom: 43px;
+                display: block;
+                max-width: 88%;
+                .login-title{
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+                .login-text{
+                    font-size: 16px;
+                    color: $grey;
+                }
+                .login-form{
+                    .login-form-input{
+                        margin-top: 11px;
+                        .input-text{
+                            height: 46px;
+                        }
+                    }
+                    label{
+                        font-size: 14px;
+                    }
+                    .login-form-button{
+                        margin-top: 30px;
+                        margin-bottom: 20px;
+                        height: 46px;
+                    }
+                    .form-error{
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+    }
+}

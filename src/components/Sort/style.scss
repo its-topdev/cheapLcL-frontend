@@ -1,0 +1,59 @@
+@import "../../styles/variables.scss";
+
+.sort{
+    position: relative;
+    .sort-menu{
+      background: $grey-super-light;
+      border: none;
+      font-size: 20px;
+      font-weight: 700;
+      color: $blue-dark;
+      height: 45px;
+      padding: 0 25px 0 19px;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 0 4px 4px 0;
+    }
+    .sort-type{
+      background: $grey-super-light;
+      border: none;
+      height: 45px;
+      display: inline-block;
+      vertical-align: middle;
+      padding: 0 3px 0 25px;
+      border-radius: 4px 0 0 4px;
+      .asc{
+        transform: rotate(180deg);
+      }
+    }
+    .menu{
+      list-style: none;
+      background: white;
+      position: absolute;
+      width: 258px;
+      right: -10px;
+      padding: 10px;
+      border-radius: 8px;
+      top: 55px;
+      box-shadow: 0 0 20px rgba(26,24,24,.25);
+      color: #555659;
+      font-size: 18px;
+      line-height: 18px;
+      .menu-item{
+        cursor: pointer;
+        padding: 20px;
+        border-radius: 8px;
+        transition: background 0.2s;
+        &:hover{
+          font-weight: 500;
+          color: $blue-dark;
+          background: $grey-super-super-light;
+        }
+        &.active{
+          font-weight: 500;
+          color: $blue-dark;
+          background: $blue-super-light;
+        }
+      }
+    }
+  }

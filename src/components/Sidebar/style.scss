@@ -1,0 +1,42 @@
+@import "../../styles/variables.scss";
+
+.sidebar{
+    box-shadow: 4px 4px 5px rgba(187, 187, 187, 0.1490196078);
+    height: 100%;
+    padding: 25px 0 25px 25px;
+    background: white;
+    .sidebar-list{
+        margin-top: 19px;
+        .sidebar-item{
+            display: block;
+            height: 56px;
+            margin-bottom: 20px;
+            line-height: 56px;
+            cursor: pointer;
+            color: $grey;
+            transition: background 0.5s;
+            svg{
+                path{
+                    fill: $grey;
+                }
+            }
+            &.active,
+            &:hover{
+                background: $blue-super-light;
+                border-right: 4px solid $blue-dark;
+                color: $blue-dark;
+                svg{
+                    path{
+                        fill: $blue-dark;
+                    }
+                }
+            }
+            .sidebar-item-name{
+                font-size: 20px;
+                font-weight: 700;
+                margin-left: 8px;
+                vertical-align: middle;
+            }
+        }
+    }
+}
