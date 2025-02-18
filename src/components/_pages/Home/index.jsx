@@ -38,10 +38,6 @@ export default function Home() {
     fetchData: fetchSearch,
   } = useFetch();
 
-  const moveStep = (s) => {
-    setStep(s);
-  };
-
   let polName = "",
     podName = "",
     amount = 0,
@@ -53,6 +49,7 @@ export default function Home() {
 
   const searchOffers = async () => {
     setSortBy(null);
+    setStep(1);
     const polId = searchData.pol.value;
     polName = searchData.pol.label;
     const podId = searchData.pod.value;
@@ -73,6 +70,10 @@ export default function Home() {
     startTime = calendarDate?.getTime();
     endTime = calendarDate?.setDate(calendarDate?.getDate() + 7 * weeks);
     fetchSearch(`${API_URL}webSchedule?pol=${polId}&pod=${podId}`, "get");
+    const element = document.getElementById("home-content");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   useEffect(() => {
@@ -98,11 +99,6 @@ export default function Home() {
       }));
     setOffers(filteredVoyages ? filteredVoyages : []);
     setSortBy("departureDate");
-    moveStep(1);
-    const element = document.getElementById("home-content");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
   }, [searchResultData]);
 
   useEffect(() => {
