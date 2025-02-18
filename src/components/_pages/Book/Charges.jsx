@@ -38,7 +38,25 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
   const isps = 1 * amount;
   const deliveryOrder = 17;
   const communicationFee = 16;
-  const transferFee = (totalGoods * 6) / 1000 > 5 ? (totalGoods * 6) / 1000 : 5;
+  const transferFee =
+    ((totalGoods +
+      itCharge +
+      terminalHandlingCharge +
+      isps +
+      deliveryOrder +
+      communicationFee) *
+      6) /
+      1000 >
+    5
+      ? ((totalGoods +
+          itCharge +
+          terminalHandlingCharge +
+          isps +
+          deliveryOrder +
+          communicationFee) *
+          6) /
+        1000
+      : 5;
 
   const localCharge =
     itCharge +

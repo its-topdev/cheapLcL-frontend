@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import SearchTitles from "./SearchTitles";
@@ -7,12 +6,12 @@ import Search from "../../Search";
 import Sort from "../../Sort";
 import SearchResults from "../../SearchResults";
 import ResultItem from "../../SearchResults/ResultItem";
-// import useFetch from '../../../hooks/useFetch';
+import useFetch from "../../../hooks/useFetch";
 // import SpecialOffers from "../../SpecialOffers";
 import ReachUs from "../../ReachUs";
 import "./style.scss";
 import { DEFAULT_POD, DEFAULT_WEEKS, prices } from "../../../constants/ports";
-// import { API_URL } from '../../../constants/config';
+import { API_URL } from "../../../constants/config";
 
 const allowedSort = [
   { name: "price", text: "Price" },
@@ -24,8 +23,7 @@ export default function Home() {
   const [offers, setOffers] = useState();
   const [sortBy, setSortBy] = useState(null);
   const [isSortingAsc, setIsSortingAsc] = useState(true);
-  const [step, setstep] = useState(0);
-  const [searchIsLoading, setSearchIsLoading] = useState(false);
+  const [step, setStep] = useState(0);
   const [searchData, setSearchData] = useState({
     pol: null,
     pod: DEFAULT_POD,
@@ -34,102 +32,78 @@ export default function Home() {
     weightAmountKg: null,
     weightAmountCbm: null,
   });
-  // const { data: searchResultData1, loading: searchIsLoading1, fetchData: fetchSearch } = useFetch();
-  const [searchResultData, setSearchResultData] = useState(null);
+  const {
+    data: searchResultData,
+    loading: searchIsLoading,
+    fetchData: fetchSearch,
+  } = useFetch();
 
-  // useEffect(() => {
-  //     console.log({ searchResultData1 })
-  // }, [searchResultData1])
+  const moveStep = (s) => {
+    setStep(s);
+  };
 
-  useEffect(() => {
-    if (offers) {
-      orderOffers();
-    }
-  }, [sortBy, isSortingAsc]);
-
-  useEffect(() => {
-    if (searchResultData != null) {
-      setOffers(searchResultData);
-      setSortBy("departureDate");
-      moveStep(1);
-      const element = document.getElementById("home-content");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-  }, [searchResultData]);
+  let polName = "",
+    podName = "",
+    amount = 0,
+    price = 0,
+    chargePrice = 0,
+    amountSymbol = "",
+    startTime = null,
+    endTime = null;
 
   const searchOffers = async () => {
     setSortBy(null);
     const polId = searchData.pol.value;
-    const polName = searchData.pol.label;
+    polName = searchData.pol.label;
     const podId = searchData.pod.value;
-    const podName = searchData.pod.label;
+    podName = searchData.pod.label;
     const weeks = searchData.weeks.value;
     const amountKg = searchData?.weightAmountKg;
     const amountCbm = searchData?.weightAmountCbm;
-    let amountSymbol = "MT";
-    let amount = amountKg;
+    amountSymbol = "MT";
+    amount = amountKg;
     if (amountKg < amountCbm) {
       amount = amountCbm;
       amountSymbol = "CBM";
     }
-    const price = prices[polId][podId];
-    const chargePrice = amount * price * 0.6 < 5 ? 5 : amount * price * 0.6;
+    price = prices[polId][podId];
+    chargePrice = amount * price * 0.6 < 5 ? 5 : amount * price * 0.6;
 
     const calendarDate = new Date(searchData?.calendarDate);
-    const startTime = calendarDate?.getTime();
-    const endTime = calendarDate?.setDate(calendarDate?.getDate() + 7 * weeks);
-
-    setSearchIsLoading(true);
-    axios
-      .get(
-        `https://csp.wships.com/wships/app/webSchedule?pol=${polId}&pod=${podId}`
-      )
-      .then((res) => {
-        const { data } = res;
-        const filteredVoyages = data?.voyages
-          ?.filter((item) => {
-            const departureTime = new Date(item?.departureDate)?.getTime();
-            return departureTime >= startTime && departureTime <= endTime;
-          })
-          ?.map((item) => ({
-            key: item?.vvoyage,
-            carrierName: "WSHIPS",
-            polName,
-            podName,
-            amountTitle: "Weight",
-            amountSymbol,
-            price,
-            chargePrice,
-            departureDate: item?.departureDate,
-            vesselName: item?.vessel,
-            voyage: item?.voyage,
-            arrivalDate: item?.arrivalDate,
-            amount,
-          }));
-
-        setSearchResultData(filteredVoyages ? filteredVoyages : []);
-        setSearchIsLoading(false);
-      });
+    startTime = calendarDate?.getTime();
+    endTime = calendarDate?.setDate(calendarDate?.getDate() + 7 * weeks);
+    fetchSearch(`${API_URL}webSchedule?pol=${polId}&pod=${podId}`, "get");
   };
 
-  const orderOffers = () => {
-    const orderArray = [...offers].sort((a, b) =>
-      isSortingAsc
-        ? a[sortBy] > b[sortBy]
-          ? 1
-          : -1
-        : a[sortBy] > b[sortBy]
-        ? -1
-        : 1
-    );
-    setOffers(orderArray);
-  };
-
-  const moveStep = (s) => {
-    setstep(s);
-  };
+  useEffect(() => {
+    const filteredVoyages = searchResultData?.voyages
+      ?.filter((item) => {
+        const departureTime = new Date(item?.departureDate)?.getTime();
+        return departureTime >= startTime && departureTime <= endTime;
+      })
+      ?.map((item) => ({
+        key: item?.vvoyage,
+        carrierName: "WSHIPS",
+        polName,
+        podName,
+        amountTitle: "Weight",
+        amountSymbol,
+        price,
+        chargePrice,
+        departureDate: item?.departureDate,
+        vesselName: item?.vessel,
+        voyage: item?.voyage,
+        arrivalDate: item?.arrivalDate,
+        amount,
+      }));
+    setOffers(filteredVoyages ? filteredVoyages : []);
+    setSortBy("departureDate");
+    moveStep(1);
+    const element = document.getElementById("home-content");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [searchResultData]);
 
   useEffect(() => {
     const rows = [];
@@ -139,6 +113,21 @@ export default function Home() {
       });
     setResults(rows);
   }, [offers]);
+
+  useEffect(() => {
+    if (offers) {
+      const orderArray = [...offers].sort((a, b) =>
+        isSortingAsc
+          ? a[sortBy] > b[sortBy]
+            ? 1
+            : -1
+          : a[sortBy] > b[sortBy]
+          ? -1
+          : 1
+      );
+      setOffers(orderArray);
+    }
+  }, [sortBy, isSortingAsc]);
 
   return (
     <div className="home">
