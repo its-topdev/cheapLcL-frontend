@@ -26,7 +26,7 @@ export const POL_OPTIONS = [
 ];
 
 export const DEFAULT_POD = {
-  value: 10,
+  value: 58,
   label: "ASHDOD",
 };
 
@@ -39,21 +39,21 @@ export const POD_OPTIONS = [DEFAULT_POD];
 
 export const prices = {
   28: {
-    10: 77,
+    58: 77,
   },
   24: {
-    10: 85,
+    58: 85,
   },
   21: {
-    10: 77,
+    58: 77,
   },
   32: {
-    10: 77,
+    58: 77,
   },
   22: {
-    10: 85,
+    58: 85,
   },
   19: {
-    10: 70,
+    58: 70,
   },
 };
