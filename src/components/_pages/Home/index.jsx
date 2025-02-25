@@ -10,7 +10,15 @@ import useFetch from "../../../hooks/useFetch";
 // import SpecialOffers from "../../SpecialOffers";
 import ReachUs from "../../ReachUs";
 import "./style.scss";
-import { DEFAULT_POD, DEFAULT_WEEKS, prices } from "../../../constants/ports";
+import {
+  DEFAULT_POD,
+  DEFAULT_WEEKS,
+  prices,
+  discount,
+  weeklyDiscount,
+  discountStartDate,
+  discountEndDate,
+} from "../../../constants/ports";
 import { API_URL } from "../../../constants/config";
 
 const allowedSort = [
@@ -38,74 +46,86 @@ export default function Home() {
     fetchData: fetchSearch,
   } = useFetch();
 
-  let polName = "",
-    podName = "",
-    amount = 0,
-    price = 0,
-    chargePrice = 0,
-    amountSymbol = "",
-    startTime = null,
-    endTime = null;
-
   const searchOffers = async () => {
     setSortBy(null);
-    setStep(1);
     const polId = searchData.pol.value;
-    polName = searchData.pol.label;
     const podId = searchData.pod.value;
-    podName = searchData.pod.label;
-    const weeks = searchData.weeks.value;
-    const amountKg = searchData?.weightAmountKg;
-    const amountCbm = searchData?.weightAmountCbm;
-    amountSymbol = "MT";
-    amount = amountKg;
-    if (amountKg < amountCbm) {
-      amount = amountCbm;
-      amountSymbol = "CBM";
-    }
-    price = prices[polId][podId];
-    chargePrice = amount * price * 0.6 < 5 ? 5 : amount * price * 0.6;
-
-    const calendarDate = new Date(searchData?.calendarDate);
-    startTime = calendarDate?.getTime();
-    endTime = calendarDate?.setDate(calendarDate?.getDate() + 7 * weeks);
     fetchSearch(`${API_URL}webSchedule?pol=${polId}&pod=${podId}`, "get");
-    const element = document.getElementById("home-content");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
   };
 
   useEffect(() => {
-    const filteredVoyages = searchResultData?.voyages
-      ?.filter((item) => {
-        const departureTime = new Date(item?.departureDate)?.getTime();
-        return departureTime >= startTime && departureTime <= endTime;
-      })
-      ?.map((item) => ({
-        key: item?.vvoyage,
-        carrierName: "WSHIPS",
-        polName,
-        podName,
-        amountTitle: "Weight",
-        amountSymbol,
-        price,
-        chargePrice,
-        departureDate: item?.departureDate,
-        vesselName: item?.vessel,
-        voyage: item?.voyage,
-        arrivalDate: item?.arrivalDate,
-        amount,
-      }));
-    setOffers(filteredVoyages ? filteredVoyages : []);
-    setSortBy("departureDate");
+    if (searchResultData) {
+      setStep(1);
+      const element = document.getElementById("home-content");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      const polName = searchData.pol.label;
+      const podName = searchData.pod.label;
+      const weeks = searchData.weeks.value;
+      const amountKg = searchData?.weightAmountKg;
+      const amountCbm = searchData?.weightAmountCbm;
+      let amountSymbol = "MT";
+      let amount = amountKg;
+      if (amountKg < amountCbm) {
+        amount = amountCbm;
+        amountSymbol = "CBM";
+      }
+      const price = prices[searchData.pol.value][searchData.pod.value];
+      const chargePrice = amount * price * 0.6 < 5 ? 5 : amount * price * 0.6;
+
+      const calendarDate = new Date(searchData?.calendarDate);
+      const startTime = calendarDate?.getTime();
+      const endTime = calendarDate?.setDate(
+        calendarDate?.getDate() + 7 * weeks
+      );
+
+      const filteredVoyages = searchResultData?.voyages
+        ?.filter((item) => {
+          const departureTime = new Date(item?.departureDate)?.getTime();
+          return departureTime >= startTime && departureTime <= endTime;
+        })
+        ?.map((item) => {
+          const departureDate = new Date(item?.departureDate);
+          const weeklyPassed =
+            departureDate - discountEndDate == 0
+              ? 0
+              : Math.floor(
+                  (departureDate - discountEndDate) / (7 * 24 * 60 * 60 * 1000)
+                ) + 1;
+          const discountedPrice =
+            departureDate < discountStartDate
+              ? price
+              : departureDate > discountEndDate
+              ? price - discount - weeklyDiscount * weeklyPassed
+              : price - discount;
+          return {
+            key: item?.vvoyage,
+            carrierName: "WSHIPS",
+            polName,
+            podName,
+            amountTitle: "Weight",
+            amountSymbol,
+            price: discountedPrice,
+            chargePrice,
+            departureDate: item?.departureDate,
+            vesselName: item?.vessel,
+            voyage: item?.voyage,
+            arrivalDate: item?.arrivalDate,
+            amount,
+          };
+        });
+      setOffers(filteredVoyages ? filteredVoyages : []);
+      setSortBy("departureDate");
+    }
   }, [searchResultData]);
 
   useEffect(() => {
     const rows = [];
     offers &&
-      offers.forEach((offer) => {
-        rows.push(<ResultItem offer={offer} key={offer.id} />);
+      offers.forEach((offer, index) => {
+        rows.push(<ResultItem offer={offer} key={index} />);
       });
     setResults(rows);
   }, [offers]);
