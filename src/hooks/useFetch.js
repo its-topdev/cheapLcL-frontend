@@ -22,7 +22,9 @@ export default function useFetch() {
       return;
     }
     if (err && err.response && err.response.status == 401) {
+      toast("Sorry, you must be signed in", { toastId: "error2" });
       navigate("/login");
+      return;
     }
     toast("error", { toastId: "error2" });
   };

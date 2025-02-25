@@ -17,7 +17,12 @@ export default function ShipperSelect({ shipper, onSetShipper }) {
   } = useFetch();
 
   const getShippers = async () => {
-    await fetchShipper(`${API_URL}shipper/user-shippers`, "get");
+    await fetchShipper(
+      `${API_URL}shipper/user-shippers`,
+      "get",
+      undefined,
+      true
+    );
   };
 
   const shipperOptions =
