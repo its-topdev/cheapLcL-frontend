@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function useFetch() {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
