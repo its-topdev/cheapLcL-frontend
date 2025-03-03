@@ -47,7 +47,6 @@ function App() {
                   <Auth allowedRoles={[userRoles.ADMIN, userRoles.USER]} />
                 }
               >
-                {/* <Route> */}
                 <Route path="/" element={<Home />} />
               </Route>
               <Route path="/login" element={<Login />} />
@@ -60,7 +59,6 @@ function App() {
                   <Auth allowedRoles={[userRoles.ADMIN, userRoles.USER]} />
                 }
               >
-                {/* <Route> */}
                 <Route
                   path="/book-confirmation"
                   element={<BookConfirmation />}

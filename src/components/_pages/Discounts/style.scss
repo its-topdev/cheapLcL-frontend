@@ -1,0 +1,116 @@
+@import "../../../styles/variables.scss";
+
+.button-blue-1.discount-new-button {
+  width: 217px;
+}
+
+.button-blue-1.discount-new-button.disabled {
+  background-color: #d9d9d9;
+  cursor: not-allowed;
+}
+
+.discount-delete-button,
+.discount-edit-button {
+  display: inline-block;
+  vertical-align: middle;
+  background: none;
+  border: none;
+  padding: 0 3px 0 3px;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+.management
+  .management-content-wrapper
+  .management-header-body
+  .management-body
+  .management-body-container
+  .management-body-table.discount-page-table
+  table
+  thead
+  th {
+  width: 7.6%;
+}
+.management
+  .management-content-wrapper
+  .management-header-body
+  .management-body
+  .management-body-container
+  .management-body-table.discount-page-table
+  table
+  td {
+  width: 7.6%;
+  font-size: 13px;
+}
+
+.discount-modal.modal-wrapper {
+  .modal {
+    top: 50%;
+    width: 756px;
+    height: 512px;
+    padding: 35px;
+  }
+  .discount-modal-first-title {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: left;
+  }
+  .discount-modal-second-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 48px;
+  }
+  .discount-form {
+    .row {
+      margin-bottom: 20px;
+    }
+    .discount-form-input {
+      text-align: left;
+      position: relative;
+      .form-error {
+        right: 20px;
+      }
+      .discount-form-label {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+      .input-text {
+        width: 100%;
+        padding: 5px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        background-position: 12px 12px;
+      }
+      .input-startDate,
+      .input-endDate {
+        background-image: url("../../../assets/svg/calendar.svg");
+        height: 47px;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        background-position: 12px 12px;
+      }
+      .input-price {
+        background-image: url("../../../assets/svg/credit-card.svg");
+        background-size: 22px;
+      }
+    }
+    .discount-form-buttons {
+      text-align: right;
+      margin-top: 72px;
+      .discount-form-button-submit,
+      .discount-form-button-cancel {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+        width: 200px;
+      }
+    }
+  }
+}

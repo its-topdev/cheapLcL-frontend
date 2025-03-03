@@ -7,8 +7,6 @@ const Auth = ({ allowedRoles }) => {
   const { currentUser } = useContext(UserContext);
   const location = useLocation();
 
-  console.log(currentUser);
-
   return currentUser && currentUser.role ? (
     allowedRoles.find((role) => currentUser.role.includes(role)) ? (
       <Outlet />

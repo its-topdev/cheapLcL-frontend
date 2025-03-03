@@ -10,15 +10,7 @@ import useFetch from "../../../hooks/useFetch";
 // import SpecialOffers from "../../SpecialOffers";
 import ReachUs from "../../ReachUs";
 import "./style.scss";
-import {
-  DEFAULT_POD,
-  DEFAULT_WEEKS,
-  prices,
-  discount,
-  weeklyDiscount,
-  discountStartDate,
-  discountEndDate,
-} from "../../../constants/ports";
+import { DEFAULT_POD, DEFAULT_WEEKS, prices } from "../../../constants/ports";
 import { API_URL } from "../../../constants/config";
 
 const allowedSort = [
@@ -46,11 +38,18 @@ export default function Home() {
     fetchData: fetchSearch,
   } = useFetch();
 
+  const {
+    data: discountsData,
+    isLoading: discountsLoading,
+    fetchData: fetchDiscounts,
+  } = useFetch();
+
   const searchOffers = async () => {
     setSortBy(null);
     const polId = searchData.pol.value;
     const podId = searchData.pod.value;
     fetchSearch(`${API_URL}webSchedule?pol=${polId}&pod=${podId}`, "get");
+    fetchDiscounts(`${API_URL}discount/list`, "get", undefined, true);
   };
 
   useEffect(() => {
@@ -80,6 +79,15 @@ export default function Home() {
       const endTime = calendarDate?.setDate(
         calendarDate?.getDate() + 7 * weeks
       );
+
+      const discount = discountsData?.discounts[0]?.fixedDiscount;
+      const weeklyDiscount = discountsData?.discounts[0]?.weeklyDiscount;
+      const discountStartDate = new Date(
+        discountsData?.discounts[0]?.startDate
+      );
+      const discountEndDate = new Date(discountsData?.discounts[0]?.endDate);
+
+      console.log(discount, weeklyDiscount, discountStartDate, discountEndDate);
 
       const filteredVoyages = searchResultData?.voyages
         ?.filter((item) => {
@@ -152,7 +160,7 @@ export default function Home() {
         <div className="search-block-content">
           <SearchTitles displayResults={step != 0} />
           <Search
-            loadingSearch={searchIsLoading}
+            loadingSearch={searchIsLoading || discountsLoading}
             searchData={searchData}
             onSetSearchData={setSearchData}
             onSearchOffers={searchOffers}

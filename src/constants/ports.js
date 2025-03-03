@@ -57,11 +57,3 @@ export const prices = {
     58: 65,
   },
 };
-
-export const discount = 5;
-
-export const weeklyDiscount = 3;
-
-export const discountStartDate = new Date("2025-02-15 00:00:00");
-
-export const discountEndDate = new Date("2025-02-28 00:00:00");

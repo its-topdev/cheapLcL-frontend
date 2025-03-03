@@ -6,11 +6,11 @@ import { API_URL } from "../../../constants/config";
 import { Pencil, Trash, Mark } from "../../../constants/icons";
 import Loader from "../../Loader/Loader";
 import useModal from "../../../hooks/useModal";
-import RouteEditModal from "./RouteEditModal";
+import DiscountEditModal from "./DiscountEditModal";
 import useFetch from "../../../hooks/useFetch";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-export default function ActionsBtn({ route, onFetchRoutes }) {
+export default function ActionsBtn({ discount, onFetchDiscounts }) {
   const [isShowing, toggle, setIsShowing] = useModal("");
   const {
     data: deleteData,
@@ -24,13 +24,18 @@ export default function ActionsBtn({ route, onFetchRoutes }) {
 
   useEffect(() => {
     if (deleteData != null) {
-      toast.success("deleted successfully");
-      onFetchRoutes();
+      toast.success("Discount plan deleted successfully");
+      onFetchDiscounts();
     }
   }, [deleteData]);
 
-  const deleteRoute = async () => {
-    await fetchDelete(`${API_URL}price/${route.id}/delete`, "post", {});
+  const deleteDiscount = async () => {
+    await fetchDelete(
+      `${API_URL}discount/${discount.id}/delete`,
+      "post",
+      {},
+      true
+    );
   };
 
   const deleteRow = () => {
@@ -43,7 +48,7 @@ export default function ActionsBtn({ route, onFetchRoutes }) {
             </div>
             <h1 className="custom-confirm-alert-title">Confirm to delete</h1>
             <p className="custom-confirm-alert-text">
-              Are you sure you want to delete the route?
+              Are you sure you want to delete the discount plan?
             </p>
             <div className="custom-confirm-alert-buttons">
               <button onClick={onClose} className="confirm-no">
@@ -51,7 +56,7 @@ export default function ActionsBtn({ route, onFetchRoutes }) {
               </button>
               <button
                 onClick={() => {
-                  deleteRoute();
+                  deleteDiscount();
                   onClose();
                 }}
                 className="confirm-yes"
@@ -67,17 +72,21 @@ export default function ActionsBtn({ route, onFetchRoutes }) {
 
   return (
     <>
-      <button onClick={editRow} className="route-edit-button" type="button">
+      <button onClick={editRow} className="discount-edit-button" type="button">
         <Pencil />
       </button>
-      <button onClick={deleteRow} className="route-delete-button" type="button">
+      <button
+        onClick={deleteRow}
+        className="discount-delete-button"
+        type="button"
+      >
         {deleteIsLoading ? <Loader /> : <Trash />}
       </button>
       {isShowing && (
-        <RouteEditModal
+        <DiscountEditModal
           show={isShowing}
-          onFetchRoutes={onFetchRoutes}
-          route={route}
+          onFetchDiscounts={onFetchDiscounts}
+          discount={discount}
           toggle={toggle}
         />
       )}
@@ -86,6 +95,6 @@ export default function ActionsBtn({ route, onFetchRoutes }) {
 }
 
 ActionsBtn.propTypes = {
-  route: PropTypes.object.isRequired,
-  onFetchRoutes: PropTypes.func.isRequired,
+  discount: PropTypes.object.isRequired,
+  onFetchDiscounts: PropTypes.func.isRequired,
 };
