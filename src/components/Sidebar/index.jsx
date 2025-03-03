@@ -2,7 +2,7 @@ import {
   DashboardIcon,
   UsersIcon,
   Amp,
-  Map,
+  // Map,
   Dollar,
   DiscountIcon,
 } from "../../constants/icons";
@@ -25,10 +25,10 @@ export default function Sidebar() {
           <Amp />
           <span className="sidebar-item-name">Quotes</span>
         </NavLink>
-        <NavLink to="/management/routes" className="sidebar-item">
+        {/* <NavLink to="/management/routes" className="sidebar-item">
           <Map />
           <span className="sidebar-item-name">Routes</span>
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/management/charges" className="sidebar-item">
           <Dollar />
           <span className="sidebar-item-name">Charges</span>

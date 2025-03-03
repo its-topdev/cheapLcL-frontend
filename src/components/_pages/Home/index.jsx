@@ -80,12 +80,14 @@ export default function Home() {
         calendarDate?.getDate() + 7 * weeks
       );
 
-      const discount = discountsData?.discounts[0]?.fixedDiscount;
-      const weeklyDiscount = discountsData?.discounts[0]?.weeklyDiscount;
+      const discount = discountsData?.discounts[0]?.fixedDiscount || 0;
+      const weeklyDiscount = discountsData?.discounts[0]?.weeklyDiscount || 0;
       const discountStartDate = new Date(
-        discountsData?.discounts[0]?.startDate
+        discountsData?.discounts[0]?.startDate || new Date()
       );
-      const discountEndDate = new Date(discountsData?.discounts[0]?.endDate);
+      const discountEndDate = new Date(
+        discountsData?.discounts[0]?.endDate || new Date()
+      );
 
       console.log(discount, weeklyDiscount, discountStartDate, discountEndDate);
 
