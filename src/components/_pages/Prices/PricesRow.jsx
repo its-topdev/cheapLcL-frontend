@@ -70,8 +70,8 @@ export default function PricesRow({ price, onFetchPrices }) {
   return (
     <>
       <tr>
-        <td>{price.pol}</td>
-        <td>{price.pod}</td>
+        <td>{price.polObj.name}</td>
+        <td>{price.podObj.name}</td>
         <td>{price.price && priceFormat(price.price)}</td>
         {/* <td className="action"><button onClick={editRow} className="charge-edit-button" type="button"><Pencil /></button></td> */}
         <td className="action">

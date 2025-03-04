@@ -73,7 +73,7 @@ export default function PricesPage() {
               <th>POL</th>
               <th>POD</th>
               <th>Price</th>
-              <th className="action"></th>
+              <th className="action">Actions</th>
             </tr>
           </thead>
           <tbody>
