@@ -2,9 +2,10 @@ import {
   DashboardIcon,
   UsersIcon,
   Amp,
-  // Map,
+  Map,
   Dollar,
   DiscountIcon,
+  CreditCardIcon,
 } from "../../constants/icons";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
@@ -25,10 +26,14 @@ export default function Sidebar() {
           <Amp />
           <span className="sidebar-item-name">Quotes</span>
         </NavLink>
-        {/* <NavLink to="/management/routes" className="sidebar-item">
+        <NavLink to="/management/routes" className="sidebar-item">
           <Map />
           <span className="sidebar-item-name">Routes</span>
-        </NavLink> */}
+        </NavLink>
+        <NavLink to="/management/prices" className="sidebar-item">
+          <CreditCardIcon />
+          <span className="sidebar-item-name">Prices</span>
+        </NavLink>
         <NavLink to="/management/charges" className="sidebar-item">
           <Dollar />
           <span className="sidebar-item-name">Charges</span>

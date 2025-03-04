@@ -1,0 +1,92 @@
+@import "../../../styles/variables.scss";
+
+.button-blue-1.prices-new-button {
+  width: 217px;
+}
+
+.prices-delete-button,
+.prices-edit-button {
+  background: none;
+  border: none;
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.prices-modal.modal-wrapper {
+  .modal {
+    top: 50%;
+    width: 520px;
+    height: 590px;
+    max-height: 90%;
+  }
+  .prices-modal-first-title {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: left;
+  }
+  .prices-modal-second-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 45px;
+  }
+  .prices-form {
+    .row {
+      margin-bottom: 20px;
+    }
+    .prices-form-input {
+      text-align: left;
+      position: relative;
+      margin-top: 10px;
+      .form-error {
+        right: 20px;
+      }
+      .prices-form-label {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      .input-text {
+        width: 100%;
+        padding: 5px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        background-position: 12px 12px;
+      }
+      .cheap__control {
+        height: 47px;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        background-repeat: no-repeat;
+        padding-left: 29px;
+        background-position: 12px 11px;
+        // background-size: 15px;
+        background-image: url("../../../assets/svg/credit-card.svg");
+        background-size: 22px;
+      }
+      .input-price {
+        background-image: url("../../../assets/svg/credit-card.svg");
+        background-size: 22px;
+      }
+      .input-name {
+        background-image: url("../../../assets/svg/credit-card.svg");
+        background-size: 22px;
+      }
+    }
+    .prices-form-buttons {
+      text-align: right;
+      margin-top: 65px;
+      display: flex;
+      justify-content: space-between;
+      .prices-form-button-submit,
+      .prices-form-button-cancel {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+        width: 48%;
+      }
+    }
+  }
+}

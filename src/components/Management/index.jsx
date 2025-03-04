@@ -8,6 +8,7 @@ import RoutesPage from "../_pages/Routes";
 import Charges from "../_pages/Charges";
 import NotFound from "../_pages/NotFound";
 import Discounts from "../_pages/Discounts";
+import Prices from "../_pages/Prices";
 import "./style.scss";
 
 export default function Management() {
@@ -26,6 +27,7 @@ export default function Management() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/quotes" element={<Quotes />} />
                 <Route path="/routes" element={<RoutesPage />} />
+                <Route path="/prices" element={<Prices />} />
                 <Route path="/charges" element={<Charges />} />
                 <Route path="/discounts" element={<Discounts />} />
               </Routes>
