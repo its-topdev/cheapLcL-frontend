@@ -11,14 +11,18 @@ import WeeksAhead from "../SearchItem/WeeksAHead";
 import Weight from "../SearchItem/Weight";
 import Loader from "../Loader/Loader";
 import "./style.scss";
+import { DEFAULT_POD, DEFAULT_WEEKS } from "../../constants/ports";
 
-function Search({
-  loadingSearch,
-  searchData,
-  onSetSearchData,
-  onSearchOffers,
-}) {
+function Search({ loadingSearch, onSearchOffers }) {
   const [tab, setTab] = useState(false);
+  const [searchData, setSearchData] = useState({
+    pol: null,
+    pod: DEFAULT_POD,
+    calendarDate: new Date(),
+    weeks: DEFAULT_WEEKS,
+    weightAmountKg: null,
+    weightAmountCbm: null,
+  });
 
   function selectTab(nextTab) {
     if (nextTab == tab) {
@@ -32,15 +36,15 @@ function Search({
     e.preventDefault();
     if (!missingFields) {
       setTab(false);
-      onSearchOffers();
+      onSearchOffers(searchData);
     }
   }
 
   const searchPort = (e, name) => {
     if (!searchData.calendarDate) {
-      onSetSearchData({ ...searchData, [name]: e, calendarDate: new Date() });
+      setSearchData({ ...searchData, [name]: e, calendarDate: new Date() });
     } else {
-      onSetSearchData({ ...searchData, [name]: e });
+      setSearchData({ ...searchData, [name]: e });
     }
   };
 
@@ -199,7 +203,7 @@ function Search({
                 <CalendarDate
                   calendarDate={searchData.calendarDate}
                   onChangeDate={(e) =>
-                    onSetSearchData({ ...searchData, calendarDate: e })
+                    setSearchData({ ...searchData, calendarDate: e })
                   }
                 />
               );
@@ -208,7 +212,7 @@ function Search({
                 <WeeksAhead
                   weeks={searchData.weeks}
                   onWeeksChange={(e) =>
-                    onSetSearchData({ ...searchData, weeks: e })
+                    setSearchData({ ...searchData, weeks: e })
                   }
                 />
               );
@@ -217,11 +221,11 @@ function Search({
                 <Weight
                   weightAmountKg={searchData.weightAmountKg}
                   onWeightAmountKgChange={(e) =>
-                    onSetSearchData({ ...searchData, weightAmountKg: e })
+                    setSearchData({ ...searchData, weightAmountKg: e })
                   }
                   weightAmountCbm={searchData.weightAmountCbm}
                   onWeightAmountCbmChange={(e) =>
-                    onSetSearchData({ ...searchData, weightAmountCbm: e })
+                    setSearchData({ ...searchData, weightAmountCbm: e })
                   }
                 />
               );
@@ -235,16 +239,7 @@ function Search({
 }
 
 Search.propTypes = {
-  loadingSearch: PropTypes.bool.isRequired,
-  searchData: PropTypes.shape({
-    pol: PropTypes.object,
-    pod: PropTypes.object,
-    calendarDate: PropTypes.instanceOf(Date),
-    weeks: PropTypes.object,
-    weightAmountKg: PropTypes.number,
-    weightAmountCbm: PropTypes.number,
-  }).isRequired,
-  onSetSearchData: PropTypes.func.isRequired,
+  loadingSearch: PropTypes.bool,
   onSearchOffers: PropTypes.func.isRequired,
 };
 

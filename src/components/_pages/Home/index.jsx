@@ -24,7 +24,7 @@ export default function Home() {
   const [sortBy, setSortBy] = useState(null);
   const [isSortingAsc, setIsSortingAsc] = useState(true);
   const [step, setStep] = useState(0);
-  const [searchData, setSearchData] = useState({
+  const [searchQuery, setSearchQuery] = useState({
     pol: null,
     pod: DEFAULT_POD,
     calendarDate: new Date(),
@@ -43,14 +43,17 @@ export default function Home() {
     isLoading: discountsLoading,
     fetchData: fetchDiscounts,
   } = useFetch();
-
-  const searchOffers = async () => {
+  const searchOffers = async (data) => {
     setSortBy(null);
-    const polId = searchData.pol.value;
-    const podId = searchData.pod.value;
+    setSearchQuery(data);
+    const polId = data.pol.value;
+    const podId = data.pod.value;
     fetchSearch(`${API_URL}webSchedule?pol=${polId}&pod=${podId}`, "get");
-    fetchDiscounts(`${API_URL}discount/list`, "get", undefined, true);
   };
+
+  useEffect(() => {
+    fetchDiscounts(`${API_URL}discount/list`, "get", undefined, true);
+  }, []);
 
   useEffect(() => {
     if (searchResultData) {
@@ -59,22 +62,27 @@ export default function Home() {
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+    }
+  }, [searchResultData]);
 
-      const polName = searchData.pol.label;
-      const podName = searchData.pod.label;
-      const weeks = searchData.weeks.value;
-      const amountKg = searchData?.weightAmountKg;
-      const amountCbm = searchData?.weightAmountCbm;
+  useEffect(() => {
+    if (searchResultData) {
+      const polName = searchQuery.pol.label;
+      const podName = searchQuery.pod.label;
+      const weeks = searchQuery.weeks.value;
+      const amountKg = searchQuery?.weightAmountKg;
+      const amountCbm = searchQuery?.weightAmountCbm;
+      const price = prices[searchQuery.pol.value][searchQuery.pod.value];
+      const calendarDate = new Date(searchQuery?.calendarDate);
+
       let amountSymbol = "MT";
       let amount = amountKg;
       if (amountKg < amountCbm) {
         amount = amountCbm;
         amountSymbol = "CBM";
       }
-      const price = prices[searchData.pol.value][searchData.pod.value];
       const chargePrice = amount * price * 0.6 < 5 ? 5 : amount * price * 0.6;
 
-      const calendarDate = new Date(searchData?.calendarDate);
       const startTime = calendarDate?.getTime();
       const endTime = calendarDate?.setDate(
         calendarDate?.getDate() + 7 * weeks
@@ -82,12 +90,14 @@ export default function Home() {
 
       const discount = discountsData?.discounts[0]?.fixedDiscount || 0;
       const weeklyDiscount = discountsData?.discounts[0]?.weeklyDiscount || 0;
-      const discountStartDate = new Date(
-        discountsData?.discounts[0]?.startDate || new Date()
-      );
-      const discountEndDate = new Date(
-        discountsData?.discounts[0]?.endDate || new Date()
-      );
+      const discountStartDate = discountsData?.discounts[0]?.startDate
+        ? new Date(discountsData?.discounts[0]?.startDate)
+        : new Date();
+      const discountEndDate = discountsData?.discounts[0]?.endDate
+        ? new Date(discountsData?.discounts[0]?.endDate)
+        : new Date();
+
+      console.log(discount, weeklyDiscount, discountStartDate, discountEndDate);
 
       const filteredVoyages = searchResultData?.voyages
         ?.filter((item) => {
@@ -108,6 +118,9 @@ export default function Home() {
               : departureDate > discountEndDate
               ? price - discount - weeklyDiscount * weeklyPassed
               : price - discount;
+
+          console.log(discountedPrice, "discountedPrice");
+
           return {
             key: item?.vvoyage,
             carrierName: "WSHIPS",
@@ -127,7 +140,7 @@ export default function Home() {
       setOffers(filteredVoyages ? filteredVoyages : []);
       setSortBy("departureDate");
     }
-  }, [searchResultData, discountsData]);
+  }, [searchResultData, discountsData, searchQuery]);
 
   useEffect(() => {
     const rows = [];
@@ -151,7 +164,7 @@ export default function Home() {
       );
       setOffers(orderArray);
     }
-  }, [sortBy, isSortingAsc, offers]);
+  }, [sortBy, isSortingAsc]);
 
   return (
     <div className="home">
@@ -161,8 +174,6 @@ export default function Home() {
           <SearchTitles displayResults={step != 0} />
           <Search
             loadingSearch={searchIsLoading || discountsLoading}
-            searchData={searchData}
-            onSetSearchData={setSearchData}
             onSearchOffers={searchOffers}
           />
         </div>
