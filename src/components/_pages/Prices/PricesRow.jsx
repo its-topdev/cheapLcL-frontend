@@ -4,7 +4,7 @@ import { confirmAlert } from "react-confirm-alert";
 import PropTypes from "prop-types";
 import { API_URL } from "../../../constants/config";
 import { priceFormat } from "../../../constants/general";
-import { Trash, Mark } from "../../../constants/icons";
+import { Trash, Mark, Pencil } from "../../../constants/icons";
 // import useModal from "../../../hooks/useModal";
 // import ChargeEditModal from "./ChargeEditModal";
 import useFetch from "../../../hooks/useFetch";
@@ -73,12 +73,20 @@ export default function PricesRow({ price, onFetchPrices }) {
         <td>{price.polObj.name}</td>
         <td>{price.podObj.name}</td>
         <td>{price.price && priceFormat(price.price)}</td>
-        {/* <td className="action"><button onClick={editRow} className="charge-edit-button" type="button"><Pencil /></button></td> */}
         <td className="action">
           <button
-            onClick={deleteRow}
-            className="charge-delete-button"
+            onClick={() => {}}
+            className="prices-edit-button disabled"
             type="button"
+            disabled
+          >
+            <Pencil />
+          </button>
+          <button
+            onClick={deleteRow}
+            className="prices-delete-button disabled"
+            type="button"
+            disabled
           >
             {priceLoading ? <Loader></Loader> : <Trash />}
           </button>
