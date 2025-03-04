@@ -36,24 +36,3 @@ export const DEFAULT_WEEKS = {
 };
 
 export const POD_OPTIONS = [DEFAULT_POD];
-
-export const prices = {
-  28: {
-    58: 60,
-  },
-  24: {
-    58: 64,
-  },
-  21: {
-    58: 60,
-  },
-  32: {
-    58: 60,
-  },
-  22: {
-    58: 62,
-  },
-  19: {
-    58: 65,
-  },
-};

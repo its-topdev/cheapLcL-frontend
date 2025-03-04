@@ -10,7 +10,7 @@ import useFetch from "../../../hooks/useFetch";
 // import SpecialOffers from "../../SpecialOffers";
 import ReachUs from "../../ReachUs";
 import "./style.scss";
-import { DEFAULT_POD, DEFAULT_WEEKS, prices } from "../../../constants/ports";
+import { DEFAULT_POD, DEFAULT_WEEKS } from "../../../constants/ports";
 import { API_URL } from "../../../constants/config";
 
 const allowedSort = [
@@ -43,6 +43,13 @@ export default function Home() {
     isLoading: discountsLoading,
     fetchData: fetchDiscounts,
   } = useFetch();
+
+  const {
+    data: pricesData,
+    isLoading: pricesLoading,
+    fetchData: fetchPrices,
+  } = useFetch();
+
   const searchOffers = async (data) => {
     setSortBy(null);
     setSearchQuery(data);
@@ -53,6 +60,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchDiscounts(`${API_URL}discount/list`, "get", undefined, true);
+    fetchPrices(`${API_URL}prices/list`, "get", undefined, true);
   }, []);
 
   useEffect(() => {
@@ -72,7 +80,12 @@ export default function Home() {
       const weeks = searchQuery.weeks.value;
       const amountKg = searchQuery?.weightAmountKg;
       const amountCbm = searchQuery?.weightAmountCbm;
-      const price = prices[searchQuery.pol.value][searchQuery.pod.value];
+      const priceRecord = pricesData?.prices?.find(
+        (p) =>
+          p.polObj.id === searchQuery.pol.value &&
+          p.podObj.id === searchQuery.pod.value
+      );
+      const price = priceRecord ? priceRecord.price : 0;
       const calendarDate = new Date(searchQuery?.calendarDate);
 
       let amountSymbol = "MT";
@@ -97,8 +110,6 @@ export default function Home() {
         ? new Date(discountsData?.discounts[0]?.endDate)
         : new Date();
 
-      console.log(discount, weeklyDiscount, discountStartDate, discountEndDate);
-
       const filteredVoyages = searchResultData?.voyages
         ?.filter((item) => {
           const departureTime = new Date(item?.departureDate)?.getTime();
@@ -118,8 +129,6 @@ export default function Home() {
               : departureDate > discountEndDate
               ? price - discount - weeklyDiscount * weeklyPassed
               : price - discount;
-
-          console.log(discountedPrice, "discountedPrice");
 
           return {
             key: item?.vvoyage,
@@ -173,7 +182,7 @@ export default function Home() {
         <div className="search-block-content">
           <SearchTitles displayResults={step != 0} />
           <Search
-            loadingSearch={searchIsLoading || discountsLoading}
+            loadingSearch={searchIsLoading || discountsLoading || pricesLoading}
             onSearchOffers={searchOffers}
           />
         </div>
