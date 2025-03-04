@@ -89,8 +89,6 @@ export default function Home() {
         discountsData?.discounts[0]?.endDate || new Date()
       );
 
-      console.log(discount, weeklyDiscount, discountStartDate, discountEndDate);
-
       const filteredVoyages = searchResultData?.voyages
         ?.filter((item) => {
           const departureTime = new Date(item?.departureDate)?.getTime();
@@ -129,7 +127,7 @@ export default function Home() {
       setOffers(filteredVoyages ? filteredVoyages : []);
       setSortBy("departureDate");
     }
-  }, [searchResultData]);
+  }, [searchResultData, discountsData]);
 
   useEffect(() => {
     const rows = [];
@@ -153,7 +151,7 @@ export default function Home() {
       );
       setOffers(orderArray);
     }
-  }, [sortBy, isSortingAsc]);
+  }, [sortBy, isSortingAsc, offers]);
 
   return (
     <div className="home">
