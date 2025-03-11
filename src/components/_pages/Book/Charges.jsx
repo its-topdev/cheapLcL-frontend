@@ -100,7 +100,7 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
         className={`charges_block_title ${open ? "open" : ""}`}
         type="button"
       >
-        Local Charges:
+        Local Charges: {priceFormat(localCharge)}
       </button>
       {open ? (
         chargesLoading ? (
