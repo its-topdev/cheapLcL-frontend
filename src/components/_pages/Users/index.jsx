@@ -25,7 +25,7 @@ export default function Users() {
       `${API_URL}user/list?page=${currentPage}&pageSize=${pageSize}`,
       "get",
       undefined,
-      true
+      true,
     );
   };
 
@@ -39,7 +39,7 @@ export default function Users() {
     usersData.users &&
     usersData.users.forEach((user) => {
       rows.push(
-        <UserRow user={user} key={user.id} onFetchUsers={fetchUsers} />
+        <UserRow user={user} key={user.id} onFetchUsers={fetchUsers} />,
       );
     });
 

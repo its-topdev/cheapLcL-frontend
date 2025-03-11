@@ -34,7 +34,7 @@ export default function ActionsBtn({ discount, onFetchDiscounts }) {
       `${API_URL}discount/${discount.id}/delete`,
       "post",
       {},
-      true
+      true,
     );
   };
 

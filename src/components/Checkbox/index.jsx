@@ -6,12 +6,17 @@ const Checkbox = ({ label, checkboxValue, onSetCheckboxValue }) => {
     onSetCheckboxValue(!checkboxValue);
   }
   return (
-      <div className="checkbox-wrapper">
-        <label>
-          <input checked={checkboxValue || ''} onChange={handleChange} className="input" type="checkbox" />
-          <span className="text" dangerouslySetInnerHTML={{ __html: label }} />
-        </label>
-      </div>
-    );
-  };
-  export default Checkbox;
+    <div className="checkbox-wrapper">
+      <label>
+        <input
+          checked={checkboxValue || ""}
+          onChange={handleChange}
+          className="input"
+          type="checkbox"
+        />
+        <span className="text" dangerouslySetInnerHTML={{ __html: label }} />
+      </label>
+    </div>
+  );
+};
+export default Checkbox;

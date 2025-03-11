@@ -38,7 +38,7 @@ export default function DiscountEditModal({
       `${API_URL}discount/${discount.id}/edit`,
       "post",
       payload,
-      true
+      true,
     );
   };
 
@@ -62,6 +62,6 @@ export default function DiscountEditModal({
         />
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

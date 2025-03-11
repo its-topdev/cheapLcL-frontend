@@ -57,7 +57,7 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
           (charge.price * amount > charge.minimumPrice
             ? charge.price * amount
             : charge.minimumPrice),
-        0
+        0,
       );
   }, [chargesData, amount]);
 

@@ -24,7 +24,7 @@ export default function ChargesPage() {
         `${API_URL}charge/list?page=${currentPage}&pageSize=${pageSize}`,
         "get",
         undefined,
-        true
+        true,
       );
     } catch (error) {
       console.log(error);
@@ -46,7 +46,7 @@ export default function ChargesPage() {
           key={charge.id}
           onFetchCharges={fetchCharges}
           onSetIsShowingModal={setIsShowing}
-        />
+        />,
       );
     });
 

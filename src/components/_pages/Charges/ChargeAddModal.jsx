@@ -55,6 +55,6 @@ export default function ChargeAddModal({
         />
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

@@ -63,6 +63,6 @@ export default function RouteAddModal({
         />
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

@@ -24,7 +24,7 @@ export default function RoutesPage() {
         `${API_URL}discount/list?page=${currentPage}&pageSize=${pageSize}`,
         "get",
         undefined,
-        true
+        true,
       );
     } catch (error) {
       console.log(error);
@@ -46,7 +46,7 @@ export default function RoutesPage() {
           key={discount.id}
           onFetchDiscounts={fetchDiscounts}
           onSetIsShowingModal={setIsShowing}
-        />
+        />,
       );
     });
 

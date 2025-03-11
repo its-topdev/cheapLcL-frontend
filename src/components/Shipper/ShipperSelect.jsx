@@ -21,7 +21,7 @@ export default function ShipperSelect({ shipper, onSetShipper }) {
       `${API_URL}shipper/user-shippers`,
       "get",
       undefined,
-      true
+      true,
     );
   };
 

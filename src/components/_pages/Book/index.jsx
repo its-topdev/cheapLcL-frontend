@@ -182,6 +182,6 @@ export default function Book({ onCloseButtonClick, offer }) {
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

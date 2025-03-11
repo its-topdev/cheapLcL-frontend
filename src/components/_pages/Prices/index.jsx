@@ -24,7 +24,7 @@ export default function PricesPage() {
         `${API_URL}prices/list?page=${currentPage}&pageSize=${pageSize}`,
         "get",
         undefined,
-        true
+        true,
       );
     } catch (error) {
       console.log(error);
@@ -46,7 +46,7 @@ export default function PricesPage() {
           key={price.id}
           onFetchPrices={fetchPrices}
           // onSetIsShowingModal={setIsShowing}
-        />
+        />,
       );
     });
 

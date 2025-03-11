@@ -125,10 +125,10 @@ export default function ChargeForm({
             {selectedType?.label === "fixed"
               ? "Total Price"
               : selectedType?.label === "calculated"
-              ? "Price per Weight/Cbm"
-              : selectedType?.label === "special"
-              ? "% of Total"
-              : "Price"}
+                ? "Price per Weight/Cbm"
+                : selectedType?.label === "special"
+                  ? "% of Total"
+                  : "Price"}
           </label>
           <input
             id="input-price"

@@ -32,7 +32,7 @@ export default function ChargeEditModal({
     await fetchEditCharge(
       `${API_URL}charge/${charge.id}/edit`,
       "post",
-      payload
+      payload,
     );
   };
 
@@ -55,6 +55,6 @@ export default function ChargeEditModal({
         />
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

@@ -55,6 +55,6 @@ export default function DiscountAddModal({
         />
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

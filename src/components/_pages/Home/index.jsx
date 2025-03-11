@@ -83,7 +83,7 @@ export default function Home() {
       const priceRecord = pricesData?.prices?.find(
         (p) =>
           p.polObj.id === searchQuery.pol.value &&
-          p.podObj.id === searchQuery.pod.value
+          p.podObj.id === searchQuery.pod.value,
       );
       const price = priceRecord ? priceRecord.price : 0;
       const calendarDate = new Date(searchQuery?.calendarDate);
@@ -98,7 +98,7 @@ export default function Home() {
 
       const startTime = calendarDate?.getTime();
       const endTime = calendarDate?.setDate(
-        calendarDate?.getDate() + 7 * weeks
+        calendarDate?.getDate() + 7 * weeks,
       );
 
       const discount = discountsData?.discounts[0]?.fixedDiscount || 0;
@@ -121,14 +121,14 @@ export default function Home() {
             departureDate - discountEndDate == 0
               ? 0
               : Math.floor(
-                  (departureDate - discountEndDate) / (7 * 24 * 60 * 60 * 1000)
+                  (departureDate - discountEndDate) / (7 * 24 * 60 * 60 * 1000),
                 ) + 1;
           const discountedPrice =
             departureDate < discountStartDate
               ? price
               : departureDate > discountEndDate
-              ? price - discount - weeklyDiscount * weeklyPassed
-              : price - discount;
+                ? price - discount - weeklyDiscount * weeklyPassed
+                : price - discount;
 
           return {
             key: item?.vvoyage,
@@ -168,8 +168,8 @@ export default function Home() {
             ? 1
             : -1
           : a[sortBy] > b[sortBy]
-          ? -1
-          : 1
+            ? -1
+            : 1,
       );
       setOffers(orderArray);
     }

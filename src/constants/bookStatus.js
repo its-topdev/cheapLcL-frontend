@@ -1,4 +1,4 @@
 export const bookStatus = {
-    "CREATED": 1,
-    "CANCELLED": 2
-  }
+  CREATED: 1,
+  CANCELLED: 2,
+};
