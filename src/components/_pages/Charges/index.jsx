@@ -71,10 +71,12 @@ export default function ChargesPage() {
           <thead>
             <tr>
               <th>name</th>
-              <th>Price</th>
+              <th>Total Price</th>
+              <th>Price per Weight/Cbm</th>
+              <th>% of Total</th>
+              <th>Minimum Price</th>
               <th>Type</th>
-              <th className="action"></th>
-              <th className="action"></th>
+              <th className="action">Actions</th>
             </tr>
           </thead>
           <tbody>
