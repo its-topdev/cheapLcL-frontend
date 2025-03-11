@@ -4,6 +4,10 @@ import { API_URL } from "../../../constants/config";
 import useFetch from "../../../hooks/useFetch";
 import Loader from "../../Loader/Loader";
 import { priceFormat } from "../../../constants/general";
+import { chargeTypes } from "../../../constants/ports";
+import { calculateChargePrice } from "../../../services/pricing/chargeCalculation";
+
+const { FIXED_CHARGE, CALCULATED_CHARGE, PERCENTAGE_CHARGE } = chargeTypes;
 
 export default function Charges({ amount, totalGoods, setSubtotal }) {
   const [open, setOpen] = useState(false);
@@ -13,13 +17,51 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
     fetchData: fetchCharges,
   } = useFetch();
 
-  useEffect(() => {
-    fetchCharges(`${API_URL}charge/list`, "get", undefined, true);
-  }, []);
+  const fixedCharges = useMemo(() => {
+    return chargesData?.charges
+      ?.filter((charge) => charge.chargeType?.name === FIXED_CHARGE)
+      ?.reduce((acc, charge) => acc + charge.price, 0);
+  }, [chargesData]);
+
+  const calculatedCharges = useMemo(() => {
+    return chargesData?.charges
+      ?.filter((charge) => charge.chargeType?.name === CALCULATED_CHARGE)
+      ?.reduce(
+        (acc, charge) =>
+          acc +
+          calculateChargePrice(
+            charge.price,
+            amount,
+            charge.chargeType?.name,
+            charge.minPrice,
+          ),
+        0,
+      );
+  }, [chargesData, amount]);
+
+  const percentageCharges = useMemo(() => {
+    return chargesData?.charges
+      ?.filter((charge) => charge.chargeType?.name === PERCENTAGE_CHARGE)
+      ?.reduce(
+        (acc, charge) =>
+          acc +
+          calculateChargePrice(
+            charge.price,
+            totalGoods + fixedCharges + calculatedCharges,
+            charge.chargeType?.name,
+            charge.minPrice,
+          ),
+        0,
+      );
+  }, [chargesData, totalGoods, fixedCharges, calculatedCharges]);
 
   const toggleCharges = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    fetchCharges(`${API_URL}charge/list`, "get", undefined, true);
+  }, []);
 
   const rows = useMemo(() => {
     return (
@@ -29,73 +71,25 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
         ?.map((charge) => (
           <tr key={charge.id}>
             <td>{charge.name}</td>
-            <td>{priceFormat(charge.price)}</td>
+            <td>
+              {priceFormat(
+                calculateChargePrice(
+                  charge.price,
+                  charge.chargeType?.name === PERCENTAGE_CHARGE
+                    ? totalGoods + fixedCharges + calculatedCharges
+                    : amount,
+                  charge.chargeType?.name,
+                  charge.minPrice,
+                ),
+              )}
+            </td>
             <td>{charge.chargeType?.name}</td>
           </tr>
         )) || []
     );
-  }, [chargesData]);
+  }, [chargesData, amount, totalGoods, fixedCharges, calculatedCharges]);
 
-  const itCharge = 1.5 * amount > 5 ? 1.5 * amount : 5;
-  const terminalHandlingCharge = amount * 13 > 16 ? amount * 13 : 16;
-  const isps = 1 * amount;
-
-  console.log(itCharge + terminalHandlingCharge + isps, "manually calculated");
-
-  const fixedCharges = useMemo(() => {
-    return chargesData?.charges
-      ?.filter((charge) => charge.chargeType?.name === "fixed")
-      ?.reduce((acc, charge) => acc + charge.price, 0);
-  }, [chargesData]);
-
-  const calculatedCharges = useMemo(() => {
-    return chargesData?.charges
-      ?.filter((charge) => charge.chargeType?.name === "calculated")
-      ?.reduce(
-        (acc, charge) =>
-          acc +
-          (charge.price * amount > charge.minimumPrice
-            ? charge.price * amount
-            : charge.minimumPrice),
-        0,
-      );
-  }, [chargesData, amount]);
-
-  const transferFee = useMemo(() => {
-    return ((totalGoods +
-      itCharge +
-      terminalHandlingCharge +
-      isps +
-      fixedCharges +
-      calculatedCharges) *
-      6) /
-      1000 >
-      5
-      ? ((totalGoods +
-          itCharge +
-          terminalHandlingCharge +
-          isps +
-          fixedCharges +
-          calculatedCharges) *
-          6) /
-          1000
-      : 5;
-  }, [
-    totalGoods,
-    itCharge,
-    terminalHandlingCharge,
-    isps,
-    fixedCharges,
-    calculatedCharges,
-  ]);
-
-  const localCharge =
-    itCharge +
-    terminalHandlingCharge +
-    isps +
-    fixedCharges +
-    calculatedCharges +
-    transferFee;
+  const localCharge = fixedCharges + calculatedCharges + percentageCharges;
 
   setSubtotal(localCharge + totalGoods);
 
@@ -121,29 +115,7 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
                   <th>Type</th>
                 </tr>
               </thead>
-              <tbody>
-                {rows}
-                <tr>
-                  <td>IT Charge</td>
-                  <td>{priceFormat(itCharge)}</td>
-                  <td>Calculated</td>
-                </tr>
-                <tr>
-                  <td>Terminal Handling Charges</td>
-                  <td>{priceFormat(terminalHandlingCharge)}</td>
-                  <td>Calculated</td>
-                </tr>
-                <tr>
-                  <td>ISPS</td>
-                  <td>{priceFormat(isps)}</td>
-                  <td>Calculated</td>
-                </tr>
-                <tr>
-                  <td>Transfer Fee</td>
-                  <td>{priceFormat(transferFee)}</td>
-                  <td>Calculated</td>
-                </tr>
-              </tbody>
+              <tbody>{rows}</tbody>
             </table>
           </div>
         )

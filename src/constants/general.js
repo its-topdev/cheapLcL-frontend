@@ -6,6 +6,10 @@ export const priceFormat = (price) => {
   return `$${parseFloat(parseFloat(price).toFixed(3))}`;
 };
 
+export const percentageFormat = (percentage) => {
+  return `${percentage}%`;
+};
+
 export const dateFormatUtc = (date) => {
   return moment.utc(date).format("DD/MM/YYYY");
 };

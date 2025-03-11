@@ -3,13 +3,16 @@ import { useEffect } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import PropTypes from "prop-types";
 import { API_URL } from "../../../constants/config";
-import { priceFormat } from "../../../constants/general";
+import { priceFormat, percentageFormat } from "../../../constants/general";
 import { Trash, Mark, Pencil } from "../../../constants/icons";
 import useModal from "../../../hooks/useModal";
 import ChargeEditModal from "./ChargeEditModal";
 import useFetch from "../../../hooks/useFetch";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Loader from "../../Loader/Loader";
+import { chargeTypes } from "../../../constants/ports";
+
+const { FIXED_CHARGE, CALCULATED_CHARGE, PERCENTAGE_CHARGE } = chargeTypes;
 
 export default function ChargeRow({ charge, onFetchCharges }) {
   const [isShowing, toggle, setIsShowing] = useModal("");
@@ -32,7 +35,12 @@ export default function ChargeRow({ charge, onFetchCharges }) {
   };
 
   const deleteCharge = async () => {
-    await fetchDeleteCharge(`${API_URL}charge/${charge.id}/delete`, "post");
+    await fetchDeleteCharge(
+      `${API_URL}charge/${charge.id}/delete`,
+      "post",
+      undefined,
+      true,
+    );
   };
 
   const deleteRow = () => {
@@ -72,18 +80,18 @@ export default function ChargeRow({ charge, onFetchCharges }) {
       <tr>
         <td>{charge.name}</td>
         <td>
-          {charge.chargeType.name === "fixed"
+          {charge.chargeType.name === FIXED_CHARGE
             ? charge.price && priceFormat(charge.price)
             : "- - -"}
         </td>
         <td>
-          {charge.chargeType.name === "calculated"
+          {charge.chargeType.name === CALCULATED_CHARGE
             ? charge.price && priceFormat(charge.price)
             : "- - -"}
         </td>
         <td>
-          {charge.chargeType.name === "special"
-            ? charge.price && priceFormat(charge.price)
+          {charge.chargeType.name === PERCENTAGE_CHARGE
+            ? charge.price && percentageFormat(charge.price)
             : "- - -"}
         </td>
         <td>{charge.minPrice ? priceFormat(charge.minPrice) : "- - -"}</td>

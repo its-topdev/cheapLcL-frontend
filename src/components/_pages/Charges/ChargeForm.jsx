@@ -5,7 +5,10 @@ import { useForm, Controller } from "react-hook-form";
 import { API_URL } from "../../../constants/config";
 import useFetch from "../../../hooks/useFetch";
 import Loader from "../../Loader/Loader";
+import { chargeTypes } from "../../../constants/ports";
 import "./style.scss";
+
+const { FIXED_CHARGE, CALCULATED_CHARGE, PERCENTAGE_CHARGE } = chargeTypes;
 
 export default function ChargeForm({
   onSubmitForm,
@@ -122,11 +125,11 @@ export default function ChargeForm({
         </div>
         <div className="charge-form-input">
           <label className="charge-form-label" htmlFor="input-price">
-            {selectedType?.label === "fixed"
+            {selectedType?.label === FIXED_CHARGE
               ? "Total Price"
-              : selectedType?.label === "calculated"
+              : selectedType?.label === CALCULATED_CHARGE
                 ? "Price per Weight/Cbm"
-                : selectedType?.label === "special"
+                : selectedType?.label === PERCENTAGE_CHARGE
                   ? "% of Total"
                   : "Price"}
           </label>
@@ -151,10 +154,10 @@ export default function ChargeForm({
             name="minPrice"
             type="number"
             className={`input-text input-price ${
-              selectedType?.label === "fixed" ? "disabled" : ""
+              selectedType?.label === FIXED_CHARGE ? "disabled" : ""
             }`}
             placeholder="Enter Minimum Price"
-            disabled={selectedType?.label === "fixed"}
+            disabled={selectedType?.label === FIXED_CHARGE}
             {...register("minPrice", formOptions.minPrice)}
           />
           <span className="form-error">

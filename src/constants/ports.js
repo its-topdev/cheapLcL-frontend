@@ -36,3 +36,9 @@ export const DEFAULT_WEEKS = {
 };
 
 export const POD_OPTIONS = [DEFAULT_POD];
+
+export const chargeTypes = {
+  FIXED_CHARGE: "fixed",
+  CALCULATED_CHARGE: "calculated",
+  PERCENTAGE_CHARGE: "percentage",
+};

@@ -33,6 +33,7 @@ export default function ChargeEditModal({
       `${API_URL}charge/${charge.id}/edit`,
       "post",
       payload,
+      true,
     );
   };
 
