@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../../../constants/config";
-// import useModal from "../../../hooks/useModal";
+import useModal from "../../../hooks/useModal";
 import Loader from "../../Loader/Loader";
 import PricesRow from "./PricesRow";
 import Pagination from "../../Pagination";
-// import PriceAddModal from "./PriceAddModal";
+import PriceAddModal from "./PricesAddModal";
 import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
 
 export default function PricesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  // const [isShowing, toggle, setIsShowing] = useModal("");
+  const [isShowing, toggle, setIsShowing] = useModal("");
   const {
     data: pricesData,
     loading: pricesLoading,
@@ -44,15 +44,15 @@ export default function PricesPage() {
         <PricesRow
           price={price}
           key={price.id}
-          onFetchPrices={fetchPrices}
-          // onSetIsShowingModal={setIsShowing}
+          onFetchPrices={fetchPriceData}
+          onSetIsShowingModal={setIsShowing}
         />,
       );
     });
 
-  // const onCloseButtonClick = () => {
-  //   toggle();
-  // };
+  const onCloseButtonClick = () => {
+    toggle();
+  };
 
   return (
     <>
@@ -61,7 +61,7 @@ export default function PricesPage() {
         <button
           type="button"
           className="button-blue-1 prices-new-button disabled"
-          // onClick={() => setIsShowing(true)}
+          onClick={() => setIsShowing(true)}
           disabled
         >
           Create New
@@ -71,6 +71,8 @@ export default function PricesPage() {
         <table>
           <thead>
             <tr>
+              <th>Valid From</th>
+              <th>Valid To</th>
               <th>POL</th>
               <th>POD</th>
               <th>Price</th>
@@ -99,13 +101,13 @@ export default function PricesPage() {
           totalCount={totalCount}
         />
       </div>
-      {/* {isShowing && (
+      {isShowing && (
         <PriceAddModal
           show={isShowing}
           onFetchPrices={fetchPrices}
           onCloseButtonClick={onCloseButtonClick}
         />
-      )} */}
+      )}
     </>
   );
 }

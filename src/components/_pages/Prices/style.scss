@@ -23,15 +23,15 @@
 .prices-edit-button.disabled {
   cursor: not-allowed;
   svg {
-    opacity: 0.5;
+    opacity: 0.3;
   }
 }
 
 .prices-modal.modal-wrapper {
   .modal {
     top: 50%;
-    width: 520px;
-    height: 590px;
+    width: 768px;
+    height: 512px;
     max-height: 90%;
   }
   .prices-modal-first-title {
@@ -43,11 +43,11 @@
     font-size: 20px;
     font-weight: 500;
     text-align: left;
-    margin-bottom: 45px;
+    margin-bottom: 36px;
   }
   .prices-form {
     .row {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .prices-form-input {
       text-align: left;
@@ -68,6 +68,23 @@
         padding-left: 40px;
         background-position: 12px 12px;
       }
+      .input-startDate,
+      .input-endDate {
+        background-image: url("../../../assets/svg/calendar.svg");
+        height: 47px;
+        border: 1px solid #d9d9d9;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+        background-position: 12px 12px;
+      }
+      .input-startDate.disabled,
+      .input-endDate.disabled {
+        background-color: #f1f1f1;
+        color: #8b8b8b;
+      }
       .cheap__control {
         height: 47px;
         border: 1px solid #d9d9d9;
@@ -75,9 +92,14 @@
         background-repeat: no-repeat;
         padding-left: 29px;
         background-position: 12px 11px;
-        // background-size: 15px;
+        background-size: 15px;
         background-image: url("../../../assets/svg/credit-card.svg");
         background-size: 22px;
+      }
+      .port-select {
+        .cheap__control {
+          background-image: url("../../../assets/svg/location-grey.svg");
+        }
       }
       .input-price {
         background-image: url("../../../assets/svg/credit-card.svg");
@@ -90,7 +112,7 @@
     }
     .prices-form-buttons {
       text-align: right;
-      margin-top: 65px;
+      margin-top: 48px;
       display: flex;
       justify-content: space-between;
       .prices-form-button-submit,

@@ -42,3 +42,10 @@ export const chargeTypes = {
   CALCULATED_CHARGE: "calculated",
   PERCENTAGE_CHARGE: "percentage",
 };
+
+export const MANUAL_PORTS = [
+  {
+    value: 19,
+    label: "NHAVA SHEVA",
+  },
+];
