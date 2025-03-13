@@ -12,18 +12,15 @@ export default function RoutesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [isShowing, toggle, setIsShowing] = useModal("");
-  const {
-    data: routesData,
-    loading: routesLoading,
-    error,
-    fetchData,
-  } = useFetch();
+  const { data: routesData, loading: routesLoading, fetchData } = useFetch();
 
   const fetchRoutes = () => {
     try {
       fetchData(
         `${API_URL}price/list?page=${currentPage}&pageSize=${pageSize}`,
         "get",
+        undefined,
+        true,
       );
     } catch (error) {
       console.log(error);
