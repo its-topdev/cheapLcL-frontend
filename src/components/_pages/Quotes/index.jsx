@@ -9,18 +9,15 @@ import "./style.scss";
 export default function Quotes() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const {
-    data: quotesData,
-    loading: quotesLoading,
-    error,
-    fetchData,
-  } = useFetch();
+  const { data: quotesData, loading: quotesLoading, fetchData } = useFetch();
 
   const fetchQuotes = () => {
     try {
       fetchData(
         `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}`,
         "get",
+        undefined,
+        true,
       );
     } catch (error) {
       console.log(error);

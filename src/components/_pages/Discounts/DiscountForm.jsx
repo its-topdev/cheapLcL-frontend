@@ -1,5 +1,5 @@
-import DatePicker from "react-datepicker";
-import { useForm, Controller } from "react-hook-form";
+// import DatePicker from "react-datepicker";
+import { useForm } from "react-hook-form";
 import Loader from "../../Loader/Loader";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
@@ -15,7 +15,7 @@ export default function DiscountForm({
     register,
     handleSubmit,
     formState: { errors },
-    control,
+    // control,
     reset,
   } = useForm({
     mode: "onChange",
@@ -44,7 +44,7 @@ export default function DiscountForm({
       onSubmit={handleSubmit(handleSubmitForm, handleError)}
     >
       <div className="row">
-        <div className="discount-form-input col-md-6">
+        {/* <div className="discount-form-input col-md-6">
           <label className="discount-form-label" htmlFor="input-startDate">
             Start Date
           </label>
@@ -67,8 +67,8 @@ export default function DiscountForm({
           <span className="form-error">
             {errors && errors.startDate ? errors.startDate.message : ""}
           </span>
-        </div>
-        <div className="discount-form-input col-md-6">
+        </div> */}
+        {/* <div className="discount-form-input col-md-6">
           <label className="discount-form-label" htmlFor="input-endDate">
             End Date
           </label>
@@ -91,7 +91,7 @@ export default function DiscountForm({
           <span className="form-error">
             {errors && errors.endDate ? errors.endDate.message : ""}
           </span>
-        </div>
+        </div> */}
       </div>
 
       <div className="row">

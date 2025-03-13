@@ -73,8 +73,8 @@ export default function RoutesPage() {
         <table>
           <thead>
             <tr>
-              <th>Start Date</th>
-              <th>End Date</th>
+              {/* <th>Start Date</th>
+              <th>End Date</th> */}
               <th>Fixed Discount</th>
               <th>Weekly Discount</th>
               <th className="actions">Actions</th>

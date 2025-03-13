@@ -28,8 +28,8 @@ export default function DiscountAddModal({
 
   const addDiscount = async (data) => {
     const payload = {
-      startDate: data.startDate,
-      endDate: data.endDate,
+      // startDate: data.startDate,
+      // endDate: data.endDate,
       fixedDiscount: data.fixedDiscount,
       weeklyDiscount: data.weeklyDiscount,
     };
