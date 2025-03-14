@@ -31,8 +31,8 @@ export default function PricesAddModal({
       startDate: data.startDate,
       endDate: data.endDate,
       price: data.price,
-      polObj: data.polObj,
-      podObj: data.podObj,
+      polObj: data.pol,
+      podObj: data.pod,
     };
     await fetchAddPrices(`${API_URL}prices/create`, "post", payload, true);
   };

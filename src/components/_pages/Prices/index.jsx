@@ -60,9 +60,8 @@ export default function PricesPage() {
         <h1 className="management-body-title">Prices</h1>
         <button
           type="button"
-          className="button-blue-1 prices-new-button disabled"
+          className="button-blue-1 prices-new-button"
           onClick={() => setIsShowing(true)}
-          disabled
         >
           Create New
         </button>

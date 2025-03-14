@@ -49,3 +49,13 @@ export const MANUAL_PORTS = [
     label: "NHAVA SHEVA",
   },
 ];
+
+export const manualPol = {
+  value: 19,
+  label: "NHAVA SHEVA",
+};
+
+export const manualPod = {
+  value: 58,
+  label: "ASHDOD",
+};
