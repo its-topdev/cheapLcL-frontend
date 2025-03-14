@@ -12,7 +12,6 @@ export const calculateChargePrice = (charge, amount, type, minValue = 0) => {
   }
 
   if (type === PERCENTAGE_CHARGE) {
-    console.log(charge, amount, type, minValue, "charge and amount");
     return (charge * amount) / 100 > minValue
       ? (charge * amount) / 100
       : minValue;

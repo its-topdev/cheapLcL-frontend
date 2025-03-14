@@ -1,4 +1,5 @@
 import "./style.scss";
+import PropTypes from "prop-types";
 
 export default function Loader({
   isLarge = false,
@@ -13,3 +14,9 @@ export default function Loader({
     </div>
   );
 }
+
+Loader.propTypes = {
+  isLarge: PropTypes.bool,
+  isSmall: PropTypes.bool,
+  isOnly: PropTypes.bool,
+};

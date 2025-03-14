@@ -91,7 +91,11 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
 
   const localCharge = fixedCharges + calculatedCharges + percentageCharges;
 
-  setSubtotal(localCharge + totalGoods);
+  useEffect(() => {
+    if (!chargesLoading) {
+      setSubtotal(localCharge + totalGoods);
+    }
+  }, [localCharge, totalGoods, setSubtotal, chargesLoading]);
 
   return (
     <div className="charges_block">
@@ -100,7 +104,11 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
         className={`charges_block_title ${open ? "open" : ""}`}
         type="button"
       >
-        Local Charges: {priceFormat(localCharge)}
+        {chargesLoading ? (
+          <Loader />
+        ) : (
+          <>Local Charges: {priceFormat(localCharge)}</>
+        )}
       </button>
       {open ? (
         chargesLoading ? (

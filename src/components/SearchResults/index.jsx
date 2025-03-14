@@ -1,9 +1,12 @@
 import PropTypes from "prop-types";
+import Loader from "../Loader/Loader";
 
-function SearchResults({ results }) {
+function SearchResults({ results, searchIsLoading }) {
   return (
     <div className="results">
-      {results.length ? (
+      {searchIsLoading ? (
+        <Loader isLarge={true} />
+      ) : results.length ? (
         results
       ) : (
         <div className="no-results">
@@ -16,6 +19,7 @@ function SearchResults({ results }) {
 
 SearchResults.propTypes = {
   results: PropTypes.array.isRequired,
+  searchIsLoading: PropTypes.bool.isRequired,
 };
 
 export default SearchResults;

@@ -100,7 +100,10 @@ export default function Home() {
                 </>
               )}
             </div>
-            <SearchResults results={results} />
+            <SearchResults
+              results={results}
+              searchIsLoading={searchIsLoading}
+            />
           </div>
         )}
         <ReachUs />
