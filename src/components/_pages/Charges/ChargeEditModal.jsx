@@ -28,6 +28,7 @@ export default function ChargeEditModal({
       name: data.name,
       price: data.price,
       type: data.type && data.type.value,
+      minPrice: data.minPrice,
     };
     await fetchEditCharge(
       `${API_URL}charge/${charge.id}/edit`,
