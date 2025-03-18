@@ -24,9 +24,13 @@ export default function DiscountForm({
         discount && discount.startDate ? new Date(discount.startDate) : "",
       endDate: discount && discount.endDate ? new Date(discount.endDate) : "",
       fixedDiscount:
-        discount && discount.fixedDiscount ? discount.fixedDiscount : "",
+        discount && discount.fixedDiscount != undefined
+          ? discount.fixedDiscount
+          : "",
       weeklyDiscount:
-        discount && discount.weeklyDiscount ? discount.weeklyDiscount : "",
+        discount && discount.weeklyDiscount != undefined
+          ? discount.weeklyDiscount
+          : "",
     },
   });
 
