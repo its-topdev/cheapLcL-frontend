@@ -103,7 +103,7 @@ export default function PricesPage() {
       {isShowing && (
         <PriceAddModal
           show={isShowing}
-          onFetchPrices={fetchPrices}
+          onFetchPrices={fetchPriceData}
           onCloseButtonClick={onCloseButtonClick}
         />
       )}

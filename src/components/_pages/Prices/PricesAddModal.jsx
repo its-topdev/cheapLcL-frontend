@@ -24,7 +24,7 @@ export default function PricesAddModal({
       onFetchPrices();
       onCloseButtonClick(true);
     }
-  }, [pricesData]);
+  }, [pricesData, onFetchPrices, onCloseButtonClick]);
 
   const addPrices = async (data) => {
     const payload = {
