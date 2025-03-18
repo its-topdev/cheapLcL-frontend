@@ -6,6 +6,7 @@ export default function PricesRow({ price, onFetchPrices }) {
   return (
     <>
       <tr>
+        <td>{price.updatedAt ? dateFormatUtc(price.updatedAt) : ""}</td>
         <td>{price.validFrom ? dateFormatUtc(price.validFrom) : ""}</td>
         <td>{price.validTo ? dateFormatUtc(price.validTo) : ""}</td>
         <td>{price.polName}</td>

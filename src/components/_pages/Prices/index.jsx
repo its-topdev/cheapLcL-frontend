@@ -70,6 +70,7 @@ export default function PricesPage() {
         <table>
           <thead>
             <tr>
+              <th>Updated At</th>
               <th>Valid From</th>
               <th>Valid To</th>
               <th>POL</th>

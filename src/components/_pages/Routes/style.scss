@@ -4,6 +4,12 @@
   width: 217px;
 }
 
+.button-blue-1.routes-new-button.disabled {
+  background-color: #d9d9d9;
+  color: #fff;
+  cursor: not-allowed;
+}
+
 .route-delete-button,
 .route-edit-button {
   display: inline-block;

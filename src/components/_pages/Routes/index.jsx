@@ -56,8 +56,9 @@ export default function RoutesPage() {
         <h1 className="management-body-title">Available Routes</h1>
         <button
           type="button"
-          className="button-blue-1 routes-new-button"
+          className="button-blue-1 routes-new-button disabled"
           onClick={() => setIsShowing(true)}
+          disabled
         >
           Create New
         </button>

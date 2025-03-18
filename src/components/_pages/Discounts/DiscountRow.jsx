@@ -9,10 +9,14 @@ export default function DiscountRow({ discount, onFetchDiscounts }) {
         {/* <td>{discount.startDate ? dateFormatUtc(discount.startDate) : ""}</td>
         <td>{discount.endDate ? dateFormatUtc(discount.endDate) : ""}</td> */}
         <td>
-          {discount.fixedDiscount ? priceFormat(discount.fixedDiscount) : ""}
+          {discount.fixedDiscount != undefined
+            ? priceFormat(discount.fixedDiscount)
+            : ""}
         </td>
         <td>
-          {discount.weeklyDiscount ? priceFormat(discount.weeklyDiscount) : ""}
+          {discount.weeklyDiscount != undefined
+            ? priceFormat(discount.weeklyDiscount)
+            : ""}
         </td>
         <td className="actions">
           <ActionsBtn discount={discount} onFetchDiscounts={onFetchDiscounts} />

@@ -37,7 +37,7 @@ export default function ChargeForm({
     defaultValues: {
       name: charge && charge.name,
       price: charge && charge.price,
-      minPrice: charge && charge.minimumPrice,
+      minPrice: charge && charge.minPrice,
       type: charge &&
         charge.chargeType && {
           value: charge.chargeType.id,
