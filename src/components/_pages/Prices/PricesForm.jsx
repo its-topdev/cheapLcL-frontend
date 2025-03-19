@@ -5,7 +5,7 @@ import Loader from "../../Loader/Loader";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from "prop-types";
 import "./style.scss";
-import { manualPol, manualPod } from "../../../constants/ports";
+// import { manualPol, manualPod } from "../../../constants/ports";
 import { useGetPortsQuery } from "../../../features/port/portSlice";
 export default function PricesForm({
   loadingSubmit,
@@ -32,13 +32,15 @@ export default function PricesForm({
             value: priceData.pol,
             label: priceData.polName,
           }
-        : manualPol,
+        : // : manualPol,
+          "",
       pod: priceData?.pod
         ? {
             value: priceData.pod,
             label: priceData.podName,
           }
-        : manualPod,
+        : // : manualPod,
+          "",
     },
   });
 
@@ -146,7 +148,8 @@ export default function PricesForm({
                   placeholder="Select Pol"
                   isSearchable={true}
                   isClearable={true}
-                  isDisabled={true}
+                  // isDisabled={true}
+                  isDisabled={isEdit}
                 />
               )}
             />
@@ -176,7 +179,8 @@ export default function PricesForm({
                   placeholder="Select Pod"
                   isSearchable={true}
                   isClearable={true}
-                  isDisabled={true}
+                  // isDisabled={true}
+                  isDisabled={isEdit}
                 />
               )}
             />

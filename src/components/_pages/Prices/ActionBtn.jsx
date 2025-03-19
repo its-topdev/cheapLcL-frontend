@@ -8,7 +8,7 @@ import Loader from "../../Loader/Loader";
 import useModal from "../../../hooks/useModal";
 import PricesEditModal from "./PricesEditModal";
 import useFetch from "../../../hooks/useFetch";
-import { MANUAL_PORTS } from "../../../constants/ports";
+// import { MANUAL_PORTS } from "../../../constants/ports";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function ActionsBtn({ priceData, onFetchPrices }) {
@@ -39,9 +39,9 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
     );
   };
 
-  const isManualPort = MANUAL_PORTS.map((port) => port.value).includes(
-    priceData.pol,
-  );
+  // const isManualPort = MANUAL_PORTS.map((port) => port.value).includes(
+  //   priceData.pol,
+  // );
 
   const deleteRow = () => {
     confirmAlert({
@@ -79,17 +79,17 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
     <>
       <button
         onClick={editRow}
-        className={`prices-edit-button ${!isManualPort ? "disabled" : ""}`}
+        className={`prices-edit-button`}
         type="button"
-        disabled={!isManualPort}
+        // disabled={!isManualPort}
       >
         <Pencil />
       </button>
       <button
         onClick={deleteRow}
-        className={`prices-delete-button ${!isManualPort ? "disabled" : ""}`}
+        className={`prices-delete-button`}
         type="button"
-        disabled={!isManualPort}
+        // disabled={!isManualPort}
       >
         {deleteIsLoading ? <Loader /> : <Trash />}
       </button>
