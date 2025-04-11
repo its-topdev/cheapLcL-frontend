@@ -60,6 +60,7 @@ export default function ActionsBtn({ user, onFetchUsers }) {
       `${API_URL}user/${user.id}/update-status`,
       "post",
       payload,
+      true,
     );
   };
 
@@ -69,6 +70,7 @@ export default function ActionsBtn({ user, onFetchUsers }) {
       `${API_URL}user/${user.id}/update-status`,
       "post",
       payload,
+      true,
     );
   };
 

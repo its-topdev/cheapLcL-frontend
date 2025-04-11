@@ -64,7 +64,8 @@ function App() {
                   element={<BookConfirmation />}
                 />
               </Route>
-              <Route element={<Auth allowedRoles={[userRoles.ADMIN]} />}>
+              {/* <Route element={<Auth allowedRoles={[userRoles.ADMIN]} />}> */}
+              <Route>
                 <Route path="/management/*" element={<Management />} />
               </Route>
             </Routes>

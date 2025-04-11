@@ -45,11 +45,14 @@ function Login() {
   const hasScroll = windowHeight < 583 ? true : false;
 
   const afterLogin = () => {
-    const { name, role, token } = loginData;
+    const { name, role, token, user_id } = loginData;
+    console.log(loginData);
+
     const isAdmin = role == userRoles.ADMIN;
-    localStorage.setItem("user", JSON.stringify({ name, role, isAdmin }));
+
+    localStorage.setItem("user", JSON.stringify({ name, role, isAdmin, user_id }));
     localStorage.setItem("token", token);
-    setCurrentUser({ name, role, isAdmin });
+    setCurrentUser({ name, role, isAdmin, user_id });
     navigate("/");
   };
 

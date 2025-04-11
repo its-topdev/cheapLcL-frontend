@@ -5,20 +5,24 @@ import QuoteRow from "./QuoteRow";
 import Pagination from "../../Pagination";
 import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
-
+import { useContext } from "react";
+import UserContext from "../../../contexts/UserContext";
 export default function Quotes() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const { currentUser } = useContext(UserContext);
+
   const { data: quotesData, loading: quotesLoading, fetchData } = useFetch();
 
   const fetchQuotes = () => {
     try {
-      fetchData(
-        `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}`,
-        "get",
-        undefined,
-        true,
-      );
+      console.log(currentUser);
+
+      const url = currentUser.isAdmin
+        ? `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}`
+        : `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}&user_id=${currentUser.user_id}&list_type=quotes`;
+
+      fetchData(url, "get", undefined, true);
     } catch (error) {
       console.log(error);
     }

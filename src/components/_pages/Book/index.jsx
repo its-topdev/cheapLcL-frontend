@@ -32,19 +32,25 @@ export default function Book({ onCloseButtonClick, offer }) {
       });
     }
   }, [bookData, navigate]);
-
+  console.log(offer);
   const submitBook = async () => {
     if (!shipper || !notice) {
       return;
     }
+
     const payload = {
       priceId: offer.id,
       basePrice: offer.price,
       weight: offer.weight,
       cbm: offer.cbm,
-      shipperId: shipper.id,
+      shipperId: shipper.value,
+      pol: offer.polName,
+      pod: offer.podName,
+      vessel: offer.vesselName,
+      voyage: offer.voyage,
     };
-    fetchCreateBook(`${API_URL}book/create`, "post", payload);
+
+    fetchCreateBook(`${API_URL}book/create`, "post", payload, true);
   };
 
   const oceanFreight = parseFloat(offer.price) * parseFloat(offer.amount);
@@ -170,9 +176,8 @@ export default function Book({ onCloseButtonClick, offer }) {
           )}
           <button
             data-tooltip-id="pay-message"
-            data-tooltip-content={`${!shipper ? "Select a Shipper" : ""}${
-              !shipper && !notice ? " / " : ""
-            }${!notice ? "Confirm notification of dangerous containers" : ""}`}
+            data-tooltip-content={`${!shipper ? "Select a Shipper" : ""}${!shipper && !notice ? " / " : ""
+              }${!notice ? "Confirm notification of dangerous containers" : ""}`}
             className="button-blue-1"
             type="button"
             onClick={submitBook}

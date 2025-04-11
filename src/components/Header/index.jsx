@@ -9,7 +9,6 @@ export default function Header() {
   const [scroll, setScroll] = useState(false);
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", () => setScroll(window.scrollY > 50));
@@ -38,7 +37,7 @@ export default function Header() {
           >
             <PersonIconBlue />
           </button>
-          {currentUser && currentUser.isAdmin && (
+          {/* {currentUser && currentUser.isAdmin && (
             <button
               onClick={() => {
                 navigate("/management/quotes");
@@ -48,7 +47,16 @@ export default function Header() {
             >
               <MenuIcon />
             </button>
-          )}
+          )} */}
+          <button
+            onClick={() => {
+              navigate("/management/quotes");
+            }}
+            className="button-link"
+            type="button"
+          >
+            <MenuIcon />
+          </button>
         </div>
       </div>
     </div>

@@ -45,16 +45,27 @@ export default function ShipperForm({
     isLoading: isLoadingPorts,
   } = useGetPortsQuery();
   const selectedCountry = watch("country");
+  const selectedCity = watch("city");
+
+  const countriesOptions =
+    countriesData &&
+    countriesData.countries &&
+    countriesData.countries.map((country) => ({
+      value: country.id,
+      label: country.name,
+    }));
+
   const portsSelectOptions =
     portData &&
     portData.data &&
     portData.data.list &&
     portData.data.list
-      .filter(
-        (item) =>
-          item.countryId ==
-          (selectedCountry ? selectedCountry.value : item.countryId),
-      )
+      .filter((item) => {
+        if (selectedCountry) {
+          return item.countryId === selectedCountry.value;
+        }
+        return true; // Show all cities if no country is selected
+      })
       .map((item) => ({
         value: item.id,
         label: item.name,
@@ -62,27 +73,44 @@ export default function ShipperForm({
       }));
 
   useEffect(() => {
+    if (selectedCity && !selectedCountry) {
+      const cityCountry = countriesData.countries.find(
+        (country) => country.id === selectedCity.countryId
+      );
+      if (cityCountry) {
+        reset({ ...watch(), country: { value: cityCountry.id, label: cityCountry.name } });
+      }
+    }
+  }, [selectedCity, countriesData, reset, watch]);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      const filteredCities = portData.data.list.filter(
+        (city) => city.countryId === selectedCountry.value
+      );
+      if (
+        !selectedCity ||
+        !filteredCities.some((city) => city.id === selectedCity.value)
+      ) {
+        reset({
+          ...watch(),
+          city: filteredCities.length
+            ? { value: filteredCities[0].id, label: filteredCities[0].name }
+            : null,
+        });
+      }
+    }
+  }, [selectedCountry, portData, reset, watch]);
+
+  useEffect(() => {
     fetchCountries(`${API_URL}country`, "get");
   }, []);
-
-  const selectedCity = watch("city");
-  const countriesOptions =
-    countriesData &&
-    countriesData.countries &&
-    countriesData.countries
-      .filter(
-        (item) => item.id == (selectedCity ? selectedCity.countryId : item.id),
-      )
-      .map((country) => ({
-        value: country.id,
-        label: country.name,
-      }));
 
   const handleSubmitForm = async (data) => {
     await onSubmitForm(data);
     reset();
   };
-  const handleError = (errors) => {};
+  const handleError = (errors) => { };
 
   const formOptions = {
     name: { required: "*name is required" },

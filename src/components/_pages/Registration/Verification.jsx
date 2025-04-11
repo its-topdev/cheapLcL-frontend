@@ -49,7 +49,7 @@ function Verification() {
       name: location.state.name,
     };
     setCode("");
-    fetchSendVerification(`${API_URL}user/send-verification`, "post", payload);
+    fetchSendVerification(`${API_URL}user/send-verification`, "post", payload, true,);
   };
 
   const handleSubmit = (e) => {

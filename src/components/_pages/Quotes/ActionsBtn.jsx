@@ -40,6 +40,7 @@ export default function ActionsBtn({ quote, onfetchQuotes }) {
       `${API_URL}book/${quote.id}/update-status`,
       "post",
       payload,
+      true,
     );
   };
 
@@ -49,6 +50,7 @@ export default function ActionsBtn({ quote, onfetchQuotes }) {
       `${API_URL}book/${quote.id}/update-status`,
       "post",
       payload,
+      true,
     );
   };
 
@@ -123,10 +125,10 @@ export default function ActionsBtn({ quote, onfetchQuotes }) {
     <>
       {(!quote.bookStatus ||
         (quote.bookStatus && quote.bookStatus.id != bookStatus.CANCELLED)) && (
-        <button className="quote-row-cancel" type="button" onClick={cancelRow}>
-          {cancelIsLoading ? <Loader /> : "Cancel"}
-        </button>
-      )}
+          <button className="quote-row-cancel" type="button" onClick={cancelRow}>
+            {cancelIsLoading ? <Loader /> : "Cancel"}
+          </button>
+        )}
       {quote.bookStatus && quote.bookStatus.id != bookStatus.CREATED && (
         <button
           className="quote-row-restore"

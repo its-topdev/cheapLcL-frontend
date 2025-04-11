@@ -22,6 +22,8 @@ export default function Home() {
   const [sortBy, setSortBy] = useState(null);
   const [isSortingAsc, setIsSortingAsc] = useState(true);
   const [step, setStep] = useState(0);
+  const [cbm, setCbm] = useState(null);
+  const [weight, setWeight] = useState(null);
   const {
     data: searchResultData,
     loading: searchIsLoading,
@@ -33,6 +35,8 @@ export default function Home() {
     const polId = data.pol.value;
     const podId = data.pod.value;
     const query = `${API_URL}prices/search?pol=${polId}&pod=${podId}&date=${data.calendarDate}&weeks=${data.weeks.value}&weightAmountKg=${data.weightAmountKg}&weightAmountCbm=${data.weightAmountCbm}`;
+    setCbm(data.weightAmountCbm);
+    setWeight(data.weightAmountKg);
     fetchSearch(query, "get", undefined, true);
   };
 
@@ -43,8 +47,13 @@ export default function Home() {
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+      const updatedOffers = searchResultData.map(offer => ({
+        ...offer,
+        cbm: cbm,
+        weight: weight,
+      }));
+      setOffers(updatedOffers);
     }
-    setOffers(searchResultData);
   }, [searchResultData]);
 
   useEffect(() => {
@@ -54,6 +63,7 @@ export default function Home() {
         rows.push(<ResultItem offer={offer} key={index} />);
       });
     setResults(rows);
+
   }, [offers]);
 
   useEffect(() => {

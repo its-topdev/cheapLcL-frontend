@@ -37,7 +37,7 @@ export default function ShipperAddModal({
       contactEmail: data.contactEmail,
       contacts: data.contacts,
     };
-    fetchCreateShipper(`${API_URL}shipper/create`, "post", payload);
+    fetchCreateShipper(`${API_URL}shipper/create`, "post", payload, true);
   };
 
   return PortalReactDOM.createPortal(

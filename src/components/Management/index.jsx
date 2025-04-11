@@ -10,8 +10,12 @@ import NotFound from "../_pages/NotFound";
 import Discounts from "../_pages/Discounts";
 import Prices from "../_pages/Prices";
 import "./style.scss";
+import UserContext from "../../contexts/UserContext";
+import { useContext } from "react";
 
 export default function Management() {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <div className="management">
       <HeaderManagement />
@@ -23,13 +27,23 @@ export default function Management() {
           <div className="management-body">
             <div className="management-body-container">
               <Routes>
-                <Route path="*" element={<NotFound />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/quotes" element={<Quotes />} />
-                <Route path="/routes" element={<RoutesPage />} />
-                <Route path="/prices" element={<Prices />} />
-                <Route path="/charges" element={<Charges />} />
-                <Route path="/discounts" element={<Discounts />} />
+                {currentUser.isAdmin && (
+                  <>
+                    <Route path="*" element={<NotFound />} />
+                    <Route path="/users" element={<Users />} />
+                    <Route path="/quotes" element={<Quotes />} />
+                    <Route path="/routes" element={<RoutesPage />} />
+                    <Route path="/prices" element={<Prices />} />
+                    <Route path="/charges" element={<Charges />} />
+                    <Route path="/discounts" element={<Discounts />} />
+                  </>
+                )}
+                {!currentUser.isAdmin && (
+                  <>
+                    <Route path="/quotes" element={<Quotes />} />
+                    <Route path="*" element={<NotFound />} />
+                  </>
+                )}
               </Routes>
               <BackButton />
             </div>
