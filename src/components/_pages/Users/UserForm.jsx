@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
 import { userRoles } from "../../../constants/userRoles";
+import useFetch from "../../../hooks/useFetch";
+import { API_URL } from "../../../constants/config";
 import {
   emailRegex,
   passwordInvalidError,
@@ -16,6 +18,8 @@ export default function UserForm({
   user,
   eventOnCloseButtonClick,
 }) {
+  const { data: companyList, loading: companyListLoading, fetchData } = useFetch();
+
   const [showChangePassword, setShowChangePassword] = useState(false);
   const {
     register,
@@ -33,6 +37,17 @@ export default function UserForm({
       role: user && { value: user.role, label: user.role },
     },
   });
+  const fetchCompanyList = async () => {
+    try {
+      const url = `${API_URL}company/list`;
+      fetchData(url, "get", undefined);
+    } catch (error) {
+      console.error("Error fetching company list:", error);
+    }
+  };
+  useEffect(() => {
+    fetchCompanyList();
+  }, []);
 
   const toggleShowChangePassword = () => {
     setShowChangePassword(!showChangePassword);
@@ -42,7 +57,7 @@ export default function UserForm({
     await onSubmitForm(data);
     reset();
   };
-  const handleError = (errors) => {};
+  const handleError = (errors) => { };
 
   const formOptions = {
     name: { required: "*Name is required" },
@@ -112,13 +127,22 @@ export default function UserForm({
           <label className="user-form-label" htmlFor="input-company">
             Company Name
           </label>
-          <input
+          <Controller
             id="input-company"
             name="company"
-            type="text"
-            className="input-text input-company"
-            placeholder="Enter Company Name"
-            {...register("company", formOptions.company)}
+            control={control}
+            rules={{ required: "*Company is required" }}
+            render={({ field }) => (
+              <Select
+                {...field}
+                loading={companyListLoading}
+                options={companyList && companyList.companies.map(company => ({ id: company.client_id, label: company.client_name_eng }))}
+                className="company-select"
+                classNamePrefix="cheap"
+                placeholder="Select Company"
+                isClearable={true}
+              />
+            )}
           />
           <span className="form-error">
             {errors && errors.company ? errors.company.message : ""}

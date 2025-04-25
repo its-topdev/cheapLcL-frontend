@@ -75,7 +75,7 @@ export default function ActionsBtn({ user, onFetchUsers }) {
   };
 
   const deleteUser = async () => {
-    await fetchDelete(`${API_URL}user/${user.id}/delete`, "post", {});
+    await fetchDelete(`${API_URL}user/${user.id}/delete`, "post", {}, true);
   };
 
   const approveRow = () => {

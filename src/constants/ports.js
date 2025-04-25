@@ -1,7 +1,7 @@
 export const POL_OPTIONS = [
   {
-    value: 28,
-    label: "NINGBO",
+    value: 46,
+    label: "NANSHA",
   },
   {
     value: 24,
@@ -14,10 +14,6 @@ export const POL_OPTIONS = [
   {
     value: 32,
     label: "SHEKOU",
-  },
-  {
-    value: 22,
-    label: "XINGANG",
   },
   {
     value: 19,

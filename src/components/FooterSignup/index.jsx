@@ -6,7 +6,7 @@ export default function FooterSignup({ className }) {
 
   return (
     <div className={`footer-signup ${className}`}>
-      New here?
+      {/* New here?
       <button
         onClick={() => {
           navigate("/registration");
@@ -16,7 +16,7 @@ export default function FooterSignup({ className }) {
       >
         Sign up
       </button>
-      for free!
+      for free! */}
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function UserAddModal({
       role: data.role && data.role.value,
       password: data.password,
     };
-    await fetchAddUser(`${API_URL}user/create`, "post", payload);
+    await fetchAddUser(`${API_URL}user/create`, "post", payload, true);
   };
 
   return PortalReactDOM.createPortal(

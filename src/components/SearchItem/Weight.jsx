@@ -8,7 +8,7 @@ export default function Weight({
   onWeightAmountCbmChange,
 }) {
   const min = 0;
-  const maxKg = 15;
+  const maxKg = 10;
   const maxCbm = 10;
 
   const mathMax = (event, maxValue) => {
