@@ -1,5 +1,7 @@
 import ActionsBtn from "./ActionsBtn";
-import { useMemo } from "react";
+import { useMemo, useContext } from "react";
+import UserContext from "../../../contexts/UserContext";
+
 import {
   BookRequestPrefix,
   dateTimeFormat,
@@ -10,6 +12,7 @@ import { chargeTypes } from "../../../constants/ports";
 const { FIXED_CHARGE, CALCULATED_CHARGE, PERCENTAGE_CHARGE } = chargeTypes;
 
 export default function QuoteRow({ quote, onfetchQuotes, charges }) {
+  const { currentUser } = useContext(UserContext);
   const chargesData = {
     charges: charges,
   };
