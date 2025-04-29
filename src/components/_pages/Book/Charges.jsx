@@ -83,7 +83,12 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
                 ),
               )}
             </td>
-            <td>{charge.chargeType?.name}</td>
+            <td>{
+              charge.chargeType?.name === 'fixed' ? 'Fixed, per BL' :
+                charge.chargeType?.name === 'calculated' ? 'Calculated' :
+                  charge.chargeType?.name === 'percentage' ? 'Calculated' :
+                    charge.chargeType?.name
+            }</td>
           </tr>
         )) || []
     );
