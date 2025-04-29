@@ -15,8 +15,6 @@ import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
 
 export default function Book({ onCloseButtonClick, offer }) {
-  console.log(offer);
-
   const [shipper, setShipper] = useState();
   const [notice, setNotice] = useState();
   const [subTotal, setSubtotal] = useState(0);
@@ -34,7 +32,6 @@ export default function Book({ onCloseButtonClick, offer }) {
       });
     }
   }, [bookData, navigate]);
-  console.log(offer);
   const submitBook = async () => {
     if (!shipper || !notice) {
       return;
@@ -185,7 +182,7 @@ export default function Book({ onCloseButtonClick, offer }) {
             type="button"
             onClick={submitBook}
           >
-            {bookLoading ? <Loader /> : "Pay By Invoice"}
+            {bookLoading ? <Loader /> : "BOOK NOW"}
           </button>
         </div>
       </div>

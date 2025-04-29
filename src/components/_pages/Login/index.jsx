@@ -46,7 +46,6 @@ function Login() {
 
   const afterLogin = () => {
     const { name, role, token, user_id } = loginData;
-    console.log(loginData);
 
     const isAdmin = role == userRoles.ADMIN;
 

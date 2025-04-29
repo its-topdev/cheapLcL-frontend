@@ -16,8 +16,6 @@ export default function Quotes() {
 
   const fetchQuotes = () => {
     try {
-      console.log(currentUser);
-
       const url = currentUser.isAdmin
         ? `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}`
         : `${API_URL}book/list?page=${currentPage}&pageSize=${pageSize}&user_id=${currentUser.user_id}&list_type=quotes`;
@@ -40,6 +38,7 @@ export default function Quotes() {
       rows.push(
         <QuoteRow
           quote={quote}
+          charges={quotesData.charges}
           key={quote.id}
           onfetchQuotes={fetchQuotes}
           quotesLoading={quotesLoading}
@@ -58,16 +57,21 @@ export default function Quotes() {
             <tr>
               <th>Number</th>
               <th>User</th>
-              <th>Price</th>
+              <th>Price(W/M)</th>
               <th>Weight</th>
               <th>Cbm</th>
+              <th>Total Price</th>
               <th>Vessel</th>
               <th>Voyage</th>
               <th>Pol</th>
               <th>Pod</th>
               <th>Date Given</th>
               <th>Status</th>
-              <th>Actions</th>
+              {
+                currentUser.isAdmin && (
+                  <th>Actions</th>
+                )
+              }
             </tr>
           </thead>
           <tbody>
