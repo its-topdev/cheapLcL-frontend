@@ -21,12 +21,15 @@ export default function UserForm({
   const { data: companyList, loading: companyListLoading, fetchData } = useFetch();
 
   const [showChangePassword, setShowChangePassword] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null);
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
     reset,
+    setValue,
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -85,6 +88,30 @@ export default function UserForm({
       value: userRoles[keyname],
       label: keyname,
     }));
+
+  const handleCompanyChange = (selectedOption) => {
+    setSelectedCompany(selectedOption);
+    setValue('company', selectedOption);
+    if (!selectedRole) {
+      const userRole = { value: "user", label: "USER" };
+      setSelectedRole(userRole);
+      setValue('role', userRole);
+    }
+  };
+
+  const handleRoleChange = (selectedOption) => {
+    setSelectedRole(selectedOption);
+    setValue('role', selectedOption);
+    if (selectedOption.value === "admin") {
+      const adminCompany = { id: "CheapLCL", label: "CheapLCL" };
+      setSelectedCompany(adminCompany);
+      setValue('company', adminCompany);
+    } else if (selectedOption.value === "user") {
+      setSelectedCompany(null);
+      setValue('company', null);
+    }
+  };
+
   return (
     <form
       className={`user-form ${user ? "edit-form" : "add-form"}`}
@@ -135,12 +162,15 @@ export default function UserForm({
             render={({ field }) => (
               <Select
                 {...field}
+                value={selectedCompany}
+                onChange={handleCompanyChange}
                 loading={companyListLoading}
                 options={companyList && companyList.companies.map(company => ({ id: company.client_id, label: company.client_name_eng }))}
                 className="company-select"
                 classNamePrefix="cheap"
                 placeholder="Select Company"
                 isClearable={true}
+                isDisabled={selectedRole && selectedRole.value === "admin"}
               />
             )}
           />
@@ -178,6 +208,8 @@ export default function UserForm({
             render={({ field }) => (
               <Select
                 {...field}
+                value={selectedRole}
+                onChange={handleRoleChange}
                 options={rolesOptions}
                 className="role-select"
                 classNamePrefix="cheap"
