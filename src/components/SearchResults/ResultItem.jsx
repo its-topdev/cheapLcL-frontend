@@ -75,6 +75,7 @@ function ResultItem({ offer }) {
             <span className="result-title">Arrival Date: </span>
             <span className="result-content">
               {offer.arrivalDate && dateFormatUtc(offer.arrivalDate)}
+              {offer.period && ` (${offer.period} days)`}
             </span>
           </div>
         </div>

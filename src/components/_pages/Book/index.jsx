@@ -15,6 +15,8 @@ import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
 
 export default function Book({ onCloseButtonClick, offer }) {
+  console.log(offer);
+
   const [shipper, setShipper] = useState();
   const [notice, setNotice] = useState();
   const [subTotal, setSubtotal] = useState(0);
@@ -128,6 +130,7 @@ export default function Book({ onCloseButtonClick, offer }) {
                     <span className="book-item-title">Arrival Date: </span>
                     <span className="book-item-content">
                       {offer.arrivalDate && dateFormatUtc(offer.arrivalDate)}
+                      {offer.period && ` (${offer.period} days)`}
                     </span>
                   </div>
                 </div>
