@@ -79,9 +79,13 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
           quote.bookStatus.name &&
           quote.bookStatus.name.toUpperCase()}
       </td>
-      <td>
-        <ActionsBtn quote={quote} onfetchQuotes={onfetchQuotes} />
-      </td>
+      {
+        currentUser.isAdmin && (
+          <td>
+            <ActionsBtn quote={quote} onfetchQuotes={onfetchQuotes} />
+          </td>
+        )
+      }
     </tr>
   );
 }
