@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { API_URL } from "../../../constants/config";
 import useModal from "../../../hooks/useModal";
 import Loader from "../../Loader/Loader";
@@ -6,8 +6,9 @@ import ShipperRow from "./ShippersRow";
 import Pagination from "../../Pagination";
 import useFetch from "../../../hooks/useFetch";
 import "./style.scss";
-
+import UserContext from "../../../contexts/UserContext";
 export default function ShippersPage() {
+  const { currentUser } = useContext(UserContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [setIsShowing] = useModal("");
@@ -19,12 +20,11 @@ export default function ShippersPage() {
 
   const fetchShipperData = () => {
     try {
-      fetchShippers(
-        `${API_URL}shipper/list?page=${currentPage}&pageSize=${pageSize}`,
-        "get",
-        undefined,
-        true,
-      );
+      const url = currentUser.isAdmin
+        ? `${API_URL}shipper/list?page=${currentPage}&pageSize=${pageSize}`
+        : `${API_URL}shipper/list?page=${currentPage}&pageSize=${pageSize}&user_id=${currentUser.user_id}&list_type=shippers`;
+
+      fetchShippers(url, "get", undefined, true);
     } catch (error) {
       console.log(error);
     }
