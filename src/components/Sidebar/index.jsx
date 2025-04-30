@@ -55,10 +55,16 @@ export default function Sidebar() {
           </>
         )}
         {!currentUser.isAdmin && (
-          <NavLink to="/management/quotes" className="sidebar-item">
-            <Amp />
-            <span className="sidebar-item-name">Quotes</span>
-          </NavLink>
+          <>
+            <NavLink to="/management/quotes" className="sidebar-item">
+              <Amp />
+              <span className="sidebar-item-name">Quotes</span>
+            </NavLink>
+            <NavLink to="/management/shippers" className="sidebar-item">
+              <ShipperIcon />
+              <span className="sidebar-item-name">Shippers</span>
+            </NavLink>
+          </>
         )}
       </nav>
     </div>

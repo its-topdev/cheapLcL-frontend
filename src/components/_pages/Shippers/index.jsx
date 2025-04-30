@@ -17,7 +17,6 @@ export default function ShippersPage() {
     loading: shippersLoading,
     fetchData: fetchShippers,
   } = useFetch();
-
   const fetchShipperData = () => {
     try {
       const url = currentUser.isAdmin
@@ -67,7 +66,7 @@ export default function ShippersPage() {
               <th>Contact Name</th>
               <th>Contact Email</th>
               <th>Contact Phone</th>
-              <th className="action">Actions</th>
+              {currentUser.isAdmin && <th className="action">Actions</th>}
             </tr>
           </thead>
           <tbody>
