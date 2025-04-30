@@ -17,6 +17,7 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
     fetchData: fetchCharges,
   } = useFetch();
 
+
   const fixedCharges = useMemo(() => {
     return chargesData?.charges
       ?.filter((charge) => charge.chargeType?.name === FIXED_CHARGE)
@@ -93,7 +94,6 @@ export default function Charges({ amount, totalGoods, setSubtotal }) {
         )) || []
     );
   }, [chargesData, amount, totalGoods, fixedCharges, calculatedCharges]);
-
   const localCharge = fixedCharges + calculatedCharges + percentageCharges;
 
   useEffect(() => {

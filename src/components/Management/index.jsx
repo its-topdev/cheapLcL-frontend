@@ -9,6 +9,7 @@ import Charges from "../_pages/Charges";
 import NotFound from "../_pages/NotFound";
 import Discounts from "../_pages/Discounts";
 import Prices from "../_pages/Prices";
+import Shippers from "../_pages/Shippers";
 import "./style.scss";
 import UserContext from "../../contexts/UserContext";
 import { useContext } from "react";
@@ -36,11 +37,14 @@ export default function Management() {
                     <Route path="/prices" element={<Prices />} />
                     <Route path="/charges" element={<Charges />} />
                     <Route path="/discounts" element={<Discounts />} />
+                    <Route path="/shippers" element={<Shippers />} />
                   </>
+
                 )}
                 {!currentUser.isAdmin && (
                   <>
                     <Route path="/quotes" element={<Quotes />} />
+                    <Route path="/shippers" element={<Shippers />} />
                     <Route path="*" element={<NotFound />} />
                   </>
                 )}

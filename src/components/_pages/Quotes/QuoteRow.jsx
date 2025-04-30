@@ -17,7 +17,8 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
     charges: charges,
   };
   const amount = quote.weight > quote.cbm ? quote.weight : quote.cbm;
-  const totalGoods = quote.basePrice;
+  const totalGoods = quote.basePrice * amount;
+
   const fixedCharges = useMemo(() => {
     return chargesData?.charges
       ?.filter((charge) => charge.chargeType?.name === FIXED_CHARGE)
@@ -61,6 +62,7 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
   //     Booked: {color: '#003E8B', background: '#F8F9FD'},
   // };
 
+
   return (
     <tr className="quote-row">
       <td>
@@ -70,7 +72,7 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
       <td>{quote.basePrice && priceFormat(quote.basePrice)}</td>
       <td>{quote.weight}MT</td>
       <td>{quote.cbm}M³</td>
-      <td>{priceFormat(totalGoods * amount + fixedCharges + calculatedCharges + percentageCharges)}</td>
+      <td>{priceFormat(totalGoods + fixedCharges + calculatedCharges + percentageCharges)}</td>
       <td>{quote.vessel}</td>
       <td>{quote.voyage}</td>
       <td>{quote.price && quote.price.polObj && quote.price.polObj.name}</td>

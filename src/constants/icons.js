@@ -35,6 +35,7 @@ import Dollar from "../assets/svg/dollar.svg?react";
 import XIcon from "../assets/svg/x-icon.svg?react";
 import SortIcon from "@mui/icons-material/Sort";
 import DiscountIcon from "../assets/svg/discount.svg?react";
+import ShipperIcon from "../assets/svg/ship.svg?react";
 
 export {
   CheapLogo,
@@ -74,4 +75,5 @@ export {
   XIcon,
   SortIcon,
   DiscountIcon,
+  ShipperIcon,
 };

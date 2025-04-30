@@ -6,6 +6,7 @@ import {
   Dollar,
   DiscountIcon,
   CreditCardIcon,
+  ShipperIcon,
 } from "../../constants/icons";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
@@ -46,6 +47,10 @@ export default function Sidebar() {
             <NavLink to="/management/discounts" className="sidebar-item">
               <DiscountIcon />
               <span className="sidebar-item-name">Discounts</span>
+            </NavLink>
+            <NavLink to="/management/shippers" className="sidebar-item">
+              <ShipperIcon />
+              <span className="sidebar-item-name">Shippers</span>
             </NavLink>
           </>
         )}
