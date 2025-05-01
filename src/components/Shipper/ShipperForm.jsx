@@ -13,7 +13,9 @@ export default function ShipperForm({
   onSubmitForm,
   shipper,
   eventOnCloseButtonClick,
+  shipperData,
 }) {
+  console.log(shipperData);
   const {
     data: countriesData,
     loading: countriesLoading,
@@ -29,11 +31,15 @@ export default function ShipperForm({
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      // name: shipper && shipper.name,
-      // address: shipper && shipper.address,
-      // city: shipper && shipper.city,
-      // zip: shipper && shipper.zip,
-    },
+      name: shipperData && shipperData.shipperName ? shipperData.shipperName : "",
+      address: shipperData && shipperData.address ? shipperData.address : "",
+      // city: shipperData && shipperData.city ? shipperData.city : "",
+      zip: shipperData && shipperData.zip ? shipperData.zip : "",
+      contactName: shipperData && shipperData.contactName ? shipperData.contactName : "",
+      contactPhone: shipperData && shipperData.contactPhone ? shipperData.contactPhone : "",
+      contactEmail: shipperData && shipperData.contactEmail ? shipperData.contactEmail : "",
+      // country: shipperData && shipperData.country ? shipperData.country : "",
+    }
   });
   const { fields, remove, append } = useFieldArray({
     control,
@@ -116,19 +122,19 @@ export default function ShipperForm({
     name: { required: "*name is required" },
     address: { required: "*address is required" },
     zip: {
-      // required: "*zip is required",
-      // pattern: {
-      //     value: /^\d{0,9}$/,
-      //     message: "*invalid zip"
-      // }
+      required: "*zip is required",
+      pattern: {
+        value: /^\d{0,9}$/,
+        message: "*invalid zip"
+      }
     },
     contactName: { required: "*Name is required" },
     contactPhone: {
       required: "*Phone is required",
-      // pattern: {
-      //     value: phoneRegex,
-      //     message: "*invalid phone number"
-      // }
+      pattern: {
+        value: phoneRegex,
+        message: "*invalid phone number"
+      }
     },
     contactEmail: {
       required: "*Email is required",

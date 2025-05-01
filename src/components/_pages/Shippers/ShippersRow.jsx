@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import UserContext from "../../../contexts/UserContext";
-// import ActionsBtn from "./ActionBtn";
+import ActionsBtn from "./ActionBtn";
 
-export default function ShipperRow({ shipper, onFetchShippers }) {
+export default function ShipperRow({ shipper, onfetchShippers }) {
   const { currentUser } = useContext(UserContext);
   return (
     <>
@@ -18,11 +18,11 @@ export default function ShipperRow({ shipper, onFetchShippers }) {
         <td>{shipper.contactName}</td>
         <td>{shipper.contactEmail}</td>
         <td>{shipper.contactPhone}</td>
-        {/* {currentUser.isAdmin && (
+        {currentUser.isAdmin && (
           <td className="action">
-            <ActionsBtn shipper={shipper} onFetchShippers={onFetchShippers} />
+            <ActionsBtn shippers={shipper} onFetchShippers={onfetchShippers} />
           </td>
-        )} */}
+        )}
       </tr>
     </>
   );

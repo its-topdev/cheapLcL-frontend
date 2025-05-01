@@ -6,12 +6,12 @@ import { API_URL } from "../../../constants/config";
 import { Pencil, Trash, Mark } from "../../../constants/icons";
 import Loader from "../../Loader/Loader";
 import useModal from "../../../hooks/useModal";
-import PricesEditModal from "./ShipperEditModal";
+import ShipperEditModal from "../../Shipper/ShipperEditModal";
 import useFetch from "../../../hooks/useFetch";
 // import { MANUAL_PORTS } from "../../../constants/ports";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-export default function ActionsBtn({ priceData, onFetchPrices }) {
+export default function ActionsBtn({ shippers, onFetchShippers }) {
   const [isShowing, toggle, setIsShowing] = useModal("");
   const {
     data: deleteData,
@@ -25,14 +25,14 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
 
   useEffect(() => {
     if (deleteData != null) {
-      toast.success("Prices deleted successfully");
-      onFetchPrices();
+      toast.success("Shipper deleted successfully");
+      onFetchShippers();
     }
   }, [deleteData]);
 
-  const deletePrices = async () => {
+  const deleteShipper = async () => {
     await fetchDelete(
-      `${API_URL}prices/${priceData.id}/delete`,
+      `${API_URL}shipper/${shippers.id}/delete`,
       "post",
       {},
       true,
@@ -53,7 +53,7 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
             </div>
             <h1 className="custom-confirm-alert-title">Confirm to delete</h1>
             <p className="custom-confirm-alert-text">
-              Are you sure you want to delete the price?
+              Are you sure you want to delete the shipper?
             </p>
             <div className="custom-confirm-alert-buttons">
               <button onClick={onClose} className="confirm-no">
@@ -61,7 +61,7 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
               </button>
               <button
                 onClick={() => {
-                  deletePrices();
+                  deleteShipper();
                   onClose();
                 }}
                 className="confirm-yes"
@@ -94,11 +94,10 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
         {deleteIsLoading ? <Loader /> : <Trash />}
       </button>
       {isShowing && (
-        <PricesEditModal
-          show={isShowing}
-          onFetchPrices={onFetchPrices}
-          priceData={priceData}
-          toggleEditModal={toggle}
+        <ShipperEditModal
+          onGetShippers={onFetchShippers}
+          shipperData={shippers}
+          onCloseButtonClick={toggle}
         />
       )}
     </>
@@ -106,6 +105,6 @@ export default function ActionsBtn({ priceData, onFetchPrices }) {
 }
 
 ActionsBtn.propTypes = {
-  priceData: PropTypes.object.isRequired,
-  onFetchPrices: PropTypes.func.isRequired,
+  shipper: PropTypes.object.isRequired,
+  onFetchShippers: PropTypes.func.isRequired,
 };

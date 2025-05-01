@@ -45,9 +45,8 @@ export default function PricesEditModal({
 
   return PortalReactDOM.createPortal(
     <div
-      className={`prices-modal modal-wrapper ${
-        show ? "show-modal" : "hide-modal"
-      }`}
+      className={`prices-modal modal-wrapper ${show ? "show-modal" : "hide-modal"
+        }`}
     >
       <div className="modal">
         <CloseModal onClose={toggleEditModal} />
