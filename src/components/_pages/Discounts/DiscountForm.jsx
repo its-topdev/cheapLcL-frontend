@@ -20,17 +20,7 @@ export default function DiscountForm({
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      startDate:
-        discount && discount.startDate ? new Date(discount.startDate) : "",
-      endDate: discount && discount.endDate ? new Date(discount.endDate) : "",
-      fixedDiscount:
-        discount && discount.fixedDiscount != undefined
-          ? discount.fixedDiscount
-          : "",
-      weeklyDiscount:
-        discount && discount.weeklyDiscount != undefined
-          ? discount.weeklyDiscount
-          : "",
+      Discount: discount && discount.discount != undefined ? discount.discount : "",
     },
   });
 
@@ -100,22 +90,22 @@ export default function DiscountForm({
 
       <div className="row">
         <div className="discount-form-input col-md-6">
-          <label className="discount-form-label" htmlFor="input-fixedDiscount">
-            Fixed Discount
+          <label className="discount-form-label" htmlFor="input-Discount">
+            Discount
           </label>
           <input
-            id="input-fixedDiscount"
-            name="fixedDiscount"
+            id="input-Discount"
+            name="Discount"
             type="number"
             className="input-text input-price"
             placeholder="Enter price"
-            {...register("fixedDiscount")}
+            {...register("Discount")}
           />
           <span className="form-error">
-            {errors && errors.fixedDiscount ? errors.fixedDiscount.message : ""}
+            {errors && errors.Discount ? errors.Discount.message : ""}
           </span>
         </div>
-        <div className="discount-form-input col-md-6">
+        {/* <div className="discount-form-input col-md-6">
           <label className="discount-form-label" htmlFor="input-weeklyDiscount">
             Weekly Discount
           </label>
@@ -132,7 +122,7 @@ export default function DiscountForm({
               ? errors.weeklyDiscount.message
               : ""}
           </span>
-        </div>
+        </div> */}
       </div>
 
       <div className="discount-form-buttons">

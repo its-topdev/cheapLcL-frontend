@@ -50,33 +50,30 @@ export default function RoutesPage() {
       );
     });
 
-  const onCloseButtonClick = () => {
-    toggle();
-  };
+  // const onCloseButtonClick = () => {
+  //   toggle();
+  // };
 
   return (
     <>
       <div className="management-body-top">
         <h1 className="management-body-title">Discounts Plan</h1>
-        <button
+        {/* <button
           type="button"
-          className={`button-blue-1 discount-new-button ${
-            discounts && discounts.length >= 1 ? "disabled" : ""
-          }`}
+          className={`button-blue-1 discount-new-button ${discounts && discounts.length >= 1 ? "disabled" : ""
+            }`}
           onClick={() => setIsShowing(true)}
           disabled={discounts && discounts.length >= 1}
         >
           Create Discount Plan
-        </button>
+        </button> */}
       </div>
       <div className="management-body-table discount-page-table">
         <table>
           <thead>
             <tr>
-              {/* <th>Start Date</th>
-              <th>End Date</th> */}
-              <th>Fixed Discount</th>
-              <th>Weekly Discount</th>
+              <th>No</th>
+              <th>Discount</th>
               <th className="actions">Actions</th>
             </tr>
           </thead>
@@ -102,13 +99,13 @@ export default function RoutesPage() {
           totalCount={totalCount}
         />
       </div>
-      {isShowing && (
+      {/* {isShowing && (
         <DiscountAddModal
           show={isShowing}
           onFetchDiscounts={fetchDiscounts}
           onCloseButtonClick={onCloseButtonClick}
         />
-      )}
+      )} */}
     </>
   );
 }

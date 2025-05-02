@@ -29,10 +29,12 @@ export default function DiscountEditModal({
 
   const editDiscount = async (data) => {
     const payload = {
+      id: discount.id,
+      price: data.Discount,
       // startDate: data.startDate,
       // endDate: data.endDate,
-      fixedDiscount: data.fixedDiscount,
-      weeklyDiscount: data.weeklyDiscount,
+      // fixedDiscount: data.fixedDiscount,
+      // weeklyDiscount: data.weeklyDiscount,
     };
     await fetchEditDiscount(
       `${API_URL}discount/${discount.id}/edit`,
@@ -44,9 +46,8 @@ export default function DiscountEditModal({
 
   return PortalReactDOM.createPortal(
     <div
-      className={`discount-modal modal-wrapper ${
-        show ? "show-modal" : "hide-modal"
-      }`}
+      className={`discount-modal modal-wrapper ${show ? "show-modal" : "hide-modal"
+        }`}
     >
       <div className="modal">
         <CloseModal onClose={toggle} />
