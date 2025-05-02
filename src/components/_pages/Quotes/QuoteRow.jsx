@@ -1,6 +1,7 @@
 import ActionsBtn from "./ActionsBtn";
-import { useMemo, useContext } from "react";
+import { useMemo, useContext, useState, useRef, useEffect } from "react";
 import UserContext from "../../../contexts/UserContext";
+import PropTypes from "prop-types";
 
 import {
   BookRequestPrefix,
@@ -10,6 +11,34 @@ import {
 import { calculateChargePrice } from "../../../services/pricing/chargeCalculation";
 import { chargeTypes } from "../../../constants/ports";
 const { FIXED_CHARGE, CALCULATED_CHARGE, PERCENTAGE_CHARGE } = chargeTypes;
+
+QuoteRow.propTypes = {
+  quote: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    weight: PropTypes.number.isRequired,
+    cbm: PropTypes.number.isRequired,
+    basePrice: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    vessel: PropTypes.string,
+    voyage: PropTypes.string,
+    price: PropTypes.shape({
+      polObj: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+      podObj: PropTypes.shape({
+        name: PropTypes.string,
+      }),
+    }),
+    createdAt: PropTypes.string,
+    bookStatus: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
+  onfetchQuotes: PropTypes.func.isRequired,
+  charges: PropTypes.array.isRequired,
+};
 
 export default function QuoteRow({ quote, onfetchQuotes, charges }) {
   const { currentUser } = useContext(UserContext);
@@ -62,9 +91,46 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
   //     Booked: {color: '#003E8B', background: '#F8F9FD'},
   // };
 
+  const [detailsVisible, setDetailsVisible] = useState(false);
+  const [detailsPosition, setDetailsPosition] = useState({ x: 0, y: 0 });
+  const detailsRef = useRef(null);
 
-  return (
-    <tr className="quote-row">
+  const handleRowClick = (event) => {
+    if (currentUser.isAdmin && event.target.closest("td:last-child")) return;
+
+    const { clientX: x, clientY: y } = event;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const divWidth = 400;
+    const divHeight = 268; // Approximate height
+
+    const adjustedX = x + divWidth > viewportWidth ? x - divWidth : x;
+    const adjustedY = y + divHeight > viewportHeight ? y - divHeight : y;
+
+    setDetailsPosition({ x: adjustedX, y: adjustedY });
+    setDetailsVisible(true);
+  };
+
+  const handleClickOutside = (event) => {
+    if (detailsRef.current && !detailsRef.current.contains(event.target)) {
+      setDetailsVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (<>
+    <tr
+      className="quote-row"
+      onClick={handleRowClick}
+      style={{ cursor: "pointer" }}
+    >
       <td>
         {BookRequestPrefix}-{quote.id}
       </td>
@@ -72,25 +138,81 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
       <td>{quote.basePrice && priceFormat(quote.basePrice)}</td>
       <td>{quote.weight}MT</td>
       <td>{quote.cbm}M³</td>
-      <td>{priceFormat(totalGoods + fixedCharges + calculatedCharges + percentageCharges)}</td>
+      <td>
+        {priceFormat(totalGoods + fixedCharges + calculatedCharges + percentageCharges)}
+      </td>
       <td>{quote.vessel}</td>
       <td>{quote.voyage}</td>
       <td>{quote.price && quote.price.polObj && quote.price.polObj.name}</td>
       <td>{quote.price && quote.price.podObj && quote.price.podObj.name}</td>
       {/* <td>{quote.bookStatus && quote.bookStatus.name && <span style={{color: statuses[quote.bookStatus.name]['color'], background: statuses[quote.bookStatus.name]['background']}}>{quote.bookStatus.name}</span>}</td> */}
       <td>{quote.createdAt && dateTimeFormat(quote.createdAt)}</td>
-      <td>
-        {quote.bookStatus &&
-          quote.bookStatus.name &&
-          quote.bookStatus.name.toUpperCase()}
-      </td>
-      {
-        currentUser.isAdmin && (
+      {currentUser.isAdmin ? (
+        <>
+          <td>
+            {quote.bookStatus &&
+              quote.bookStatus.name &&
+              quote.bookStatus.name.toUpperCase()}
+          </td>
           <td>
             <ActionsBtn quote={quote} onfetchQuotes={onfetchQuotes} />
           </td>
-        )
-      }
+        </>
+      ) : null}
     </tr>
+    {detailsVisible && (
+      <div
+        ref={detailsRef}
+        style={{
+          position: "fixed",
+          top: detailsPosition.y,
+          left: detailsPosition.x,
+          width: "400px",
+          backgroundColor: "white",
+          border: "1px solid #ccc",
+          padding: "10px",
+          zIndex: 1000,
+        }}
+      >
+        <table>
+          <tbody>
+            <tr>
+              <td>Basic Price</td>
+              <td>{priceFormat(quote.basePrice)}</td>
+            </tr>
+            <tr>
+              <td>Weight/CBM</td>
+              <td>
+                {amount}
+                {quote.weight > quote.cbm ? "MT" : "M³"}
+              </td>
+            </tr>
+            <tr>
+              <td>Ocean Freight</td>
+              <td>{priceFormat(quote.basePrice * amount)}</td>
+            </tr>
+            <tr>
+              <td>Fixed Price</td>
+              <td>{priceFormat(fixedCharges)}</td>
+            </tr>
+            <tr>
+              <td>Calculated Price</td>
+              <td>{priceFormat(calculatedCharges + percentageCharges)}</td>
+            </tr>
+            <tr>
+              <td>Total Price</td>
+              <td>
+                {priceFormat(
+                  totalGoods +
+                  fixedCharges +
+                  calculatedCharges +
+                  percentageCharges,
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    )}</>
   );
 }

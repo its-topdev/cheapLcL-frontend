@@ -66,11 +66,13 @@ export default function Quotes() {
               <th>Pol</th>
               <th>Pod</th>
               <th>Date Given</th>
-              <th>Status</th>
               {
-                currentUser.isAdmin && (
-                  <th>Actions</th>
-                )
+                currentUser.isAdmin ? (
+                  <>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </>
+                ) : null
               }
             </tr>
           </thead>
