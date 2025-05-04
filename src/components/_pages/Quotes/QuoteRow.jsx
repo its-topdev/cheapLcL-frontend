@@ -102,8 +102,8 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    const divWidth = 400;
-    const divHeight = 268; // Approximate height
+    const divWidth = 1000;
+    const divHeight = 330; // Approximate height
 
     const adjustedX = x + divWidth > viewportWidth ? x - divWidth : x;
     const adjustedY = y + divHeight > viewportHeight ? y - divHeight : y;
@@ -167,49 +167,78 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
           position: "fixed",
           top: detailsPosition.y,
           left: detailsPosition.x,
-          width: "400px",
+          width: "1000px",
           backgroundColor: "white",
           border: "1px solid #ccc",
-          padding: "10px",
           zIndex: 1000,
         }}
       >
         <table>
           <tbody>
-            <tr>
-              <td>Basic Price</td>
-              <td>{priceFormat(quote.basePrice)}</td>
-            </tr>
-            <tr>
-              <td>Weight/CBM</td>
-              <td>
-                {amount}
-                {quote.weight > quote.cbm ? "MT" : "M³"}
+            <tr style={{ border: "0px" }}>
+              <td style={{ padding: "0px" }}>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Shipper Name</td>
+                  <td>{quote.shipper && quote.shipper.name}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Shipper Address</td>
+                  <td>{quote.shipper && quote.shipper.address}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Country</td>
+                  <td>{quote.shipper && quote.shipper.countryObj && quote.shipper.countryObj.name}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>City</td>
+                  <td>{quote.shipper && quote.shipper.cityObj && quote.shipper.cityObj.name}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Zip Code</td>
+                  <td>{quote.shipper && quote.shipper.zip}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Contact Name</td>
+                  <td>{quote.shipper && quote.shipper.contactObj[0] && quote.shipper.contactObj[0].name}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Contact Number</td>
+                  <td>{quote.shipper && quote.shipper.contactObj[0] && quote.shipper.contactObj[0].phone}</td>
+                </tr>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Contact Email</td>
+                  <td>{quote.shipper && quote.shipper.contactObj[0] && quote.shipper.contactObj[0].email}</td>
+                </tr>
+              </td>
+              <td style={{ padding: "0px" }}>
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Ocean Freight</td>
+                  <td>{priceFormat(quote.basePrice * amount)}</td>
+                </tr>
+                {chargesData?.charges?.map((charge) => (
+                  <tr key={charge.id}>
+                    <td style={{ backgroundColor: "#f0f0f0" }}>{charge.name}</td>
+                    <td>
+                      {priceFormat(
+                        calculateChargePrice(
+                          charge.price,
+                          charge.chargeType?.name === PERCENTAGE_CHARGE
+                            ? totalGoods + fixedCharges + calculatedCharges
+                            : amount,
+                          charge.chargeType?.name,
+                          charge.minPrice,
+                        ),
+                      )}
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td style={{ backgroundColor: "#f0f0f0" }}>Total</td>
+                  <td>{priceFormat(totalGoods + fixedCharges + calculatedCharges + percentageCharges)}</td>
+                </tr>
               </td>
             </tr>
-            <tr>
-              <td>Ocean Freight</td>
-              <td>{priceFormat(quote.basePrice * amount)}</td>
-            </tr>
-            <tr>
-              <td>Fixed Price</td>
-              <td>{priceFormat(fixedCharges)}</td>
-            </tr>
-            <tr>
-              <td>Calculated Price</td>
-              <td>{priceFormat(calculatedCharges + percentageCharges)}</td>
-            </tr>
-            <tr>
-              <td>Total Price</td>
-              <td>
-                {priceFormat(
-                  totalGoods +
-                  fixedCharges +
-                  calculatedCharges +
-                  percentageCharges,
-                )}
-              </td>
-            </tr>
+
           </tbody>
         </table>
       </div>
