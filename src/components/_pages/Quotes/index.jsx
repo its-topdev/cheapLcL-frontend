@@ -39,6 +39,7 @@ export default function Quotes() {
         <QuoteRow
           quote={quote}
           charges={quotesData.charges}
+          number={quote.id}
           key={quote.id}
           onfetchQuotes={fetchQuotes}
           quotesLoading={quotesLoading}

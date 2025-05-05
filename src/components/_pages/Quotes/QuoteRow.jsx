@@ -40,7 +40,7 @@ QuoteRow.propTypes = {
   charges: PropTypes.array.isRequired,
 };
 
-export default function QuoteRow({ quote, onfetchQuotes, charges }) {
+export default function QuoteRow({ quote, onfetchQuotes, charges, number }) {
   const { currentUser } = useContext(UserContext);
   const chargesData = {
     charges: charges,
@@ -132,7 +132,7 @@ export default function QuoteRow({ quote, onfetchQuotes, charges }) {
       style={{ cursor: "pointer" }}
     >
       <td>
-        {BookRequestPrefix}-{quote.id}
+        {BookRequestPrefix}-{number}
       </td>
       <td>{quote.user && quote.user.name}</td>
       <td>{quote.basePrice && priceFormat(quote.basePrice)}</td>
