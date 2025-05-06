@@ -47,6 +47,9 @@ export default function Book({ onCloseButtonClick, offer }) {
       pod: offer.podName,
       vessel: offer.vesselName,
       voyage: offer.voyage,
+      startDate: dateFormatUtc(offer.departureDate),
+      endDate: dateFormatUtc(offer.arrivalDate),
+      totalPrice: priceFormat(subTotal),
     };
 
     fetchCreateBook(`${API_URL}book/create`, "post", payload, true);
