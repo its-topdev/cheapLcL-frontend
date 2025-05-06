@@ -11,14 +11,14 @@ export const POL_OPTIONS = [
     value: 21,
     label: "SHANGHAI",
   },
-  {
-    value: 32,
-    label: "SHEKOU",
-  },
-  {
-    value: 19,
-    label: "NHAVA SHEVA",
-  },
+  // {
+  //   value: 32,
+  //   label: "SHEKOU",
+  // },
+  // {
+  //   value: 19,
+  //   label: "NHAVA SHEVA",
+  // },
 ];
 
 export const DEFAULT_POD = {

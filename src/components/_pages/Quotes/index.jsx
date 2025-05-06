@@ -34,12 +34,11 @@ export default function Quotes() {
   const quotes = quotesData && quotesData.books;
   const totalCount = quotesData && quotesData.totalCount;
   quotes &&
-    quotes.forEach((quote) => {
+    quotes.forEach((quote, index) => {
       rows.push(
         <QuoteRow
           quote={quote}
           charges={quotesData.charges}
-          number={quote.id}
           key={quote.id}
           onfetchQuotes={fetchQuotes}
           quotesLoading={quotesLoading}
