@@ -8,7 +8,7 @@ import useFetch from "../../../hooks/useFetch";
 import Loader from "../../Loader/Loader";
 import "./style.scss";
 
-function ForgotPassword() {
+function ForgotPassword({ status }) {
   const { windowHeight } = useContext(WindowSizeContext);
   const [email, setEmail] = useState("");
   const [verificationSent, setVerificationSent] = useState(false);
@@ -78,7 +78,7 @@ function ForgotPassword() {
       <div className="login-wrapper">
         <HeaderInner />
         <div className="login-content">
-          <h1 className="login-title">Forgot Password?</h1>
+          <h1 className="login-title">{status === "new" ? "Set Password" : "Forgot Password?"}</h1>
           {verificationSent ? getForgotPassMsg() : getPasswordForm()}
         </div>
         <FooterSignup className={"display-desktop-720"} />

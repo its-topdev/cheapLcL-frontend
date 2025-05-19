@@ -60,7 +60,7 @@ function ResetPassword() {
       <div className="login-wrapper">
         <HeaderInner />
         <div className="login-content">
-          <h1 className="login-title">Reset Password</h1>
+          <h1 className="login-title">Set Password</h1>
           <h2 className="login-text">Please enter new password</h2>
           <form className="login-form">
             <div className="login-form-input">
@@ -87,7 +87,7 @@ function ResetPassword() {
               onClick={handleSubmit}
               type="submit"
             >
-              {resetIsLoading ? <Loader /> : "Update"}
+              {resetIsLoading ? <Loader /> : "Submit"}
             </button>
           </form>
         </div>

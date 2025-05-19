@@ -3,7 +3,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import SearchTitles from "./SearchTitles";
 import Search from "../../Search";
-import Sort from "../../Sort";
+// import Sort from "../../Sort";
 import SearchResults from "../../SearchResults";
 import ResultItem from "../../SearchResults/ResultItem";
 import useFetch from "../../../hooks/useFetch";
@@ -100,13 +100,13 @@ export default function Home() {
               {results?.length > 0 && (
                 <>
                   <h2 className="results-top-title">Search Results for You</h2>
-                  <Sort
+                  {/* <Sort
                     allowedSort={allowedSort}
                     sortBy={sortBy}
                     onSetSortBy={setSortBy}
                     isSortingAsc={isSortingAsc}
                     onSetIsSortingAsc={setIsSortingAsc}
-                  />
+                  /> */}
                 </>
               )}
             </div>

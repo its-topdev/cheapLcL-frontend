@@ -130,7 +130,7 @@ export default function Book({ onCloseButtonClick, offer }) {
                     <span className="book-item-title">Arrival Date: </span>
                     <span className="book-item-content">
                       {offer.arrivalDate && dateFormatUtc(offer.arrivalDate)}
-                      {offer.period && ` (${offer.period} days)`}
+                      {offer.period && <span>&nbsp;&nbsp;&nbsp;&nbsp;({offer.period} days)</span>}
                     </span>
                   </div>
                 </div>
